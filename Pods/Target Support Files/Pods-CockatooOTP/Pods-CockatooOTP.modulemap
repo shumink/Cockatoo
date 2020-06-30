@@ -1,0 +1,6 @@
+framework module Pods_CockatooOTP {
+  umbrella header "Pods-CockatooOTP-umbrella.h"
+
+  export *
+  module * { export * }
+}

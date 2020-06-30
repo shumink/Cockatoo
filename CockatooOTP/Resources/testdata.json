@@ -1,0 +1,31 @@
+[
+    {
+        "service": "Amazon Web Service",
+        "account": "me@shumink.com",
+        "key": "askoluxg5jl4ryempl34o7x7g3qyqfdq",
+        "interval": 30,
+        "digits": 6,
+    },
+    {
+        "service": "ProtonMail",
+        "account": "shuminkong@protonmail.com",
+        "key": "7xibo5hyp2kiriclbn6wryksekwaypjj",
+        "interval": 10,
+        "digits": 6,
+    },
+    {
+        "service": "Tutanota",
+        "account": "shumin@tuta.io",
+        "key": "ypxidqgov7ojvfkcdnoa6liz7ewdduj4",
+        "interval": 30,
+        "digits": 6,
+    },
+    {
+        "service": "Google",
+        "account": "shuminko@gmail.com",
+        "key": "7mosptk3y3rdooiongkdoqbnwlef25sf",
+        "interval": 30,
+        "digits": 6,
+    },
+]
+

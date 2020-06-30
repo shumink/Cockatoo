@@ -3,27 +3,51 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D431BB1E610CB5C6FA3D99D /* Pods_CockatooOTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */; };
 		3E273D6E24AB2C3400872C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D6D24AB2C3400872C6C /* AppDelegate.swift */; };
 		3E273D7024AB2C3400872C6C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D6F24AB2C3400872C6C /* SceneDelegate.swift */; };
-		3E273D7224AB2C3400872C6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D7124AB2C3400872C6C /* ContentView.swift */; };
 		3E273D7424AB2C3500872C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D7324AB2C3500872C6C /* Assets.xcassets */; };
 		3E273D7724AB2C3500872C6C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D7624AB2C3500872C6C /* Preview Assets.xcassets */; };
 		3E273D7A24AB2C3500872C6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D7824AB2C3500872C6C /* LaunchScreen.storyboard */; };
+		3E273D8224AB478600872C6C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8124AB478600872C6C /* TimeManager.swift */; };
+		3E273D8524AB47ED00872C6C /* testdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D8424AB47ED00872C6C /* testdata.json */; };
+		3E273D8924AB48E300872C6C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8724AB48E200872C6C /* Data.swift */; };
+		3E273D8A24AB48E300872C6C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8824AB48E200872C6C /* Account.swift */; };
+		3E273D9524AB493300872C6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D9324AB493300872C6C /* ContentView.swift */; };
+		3E273D9624AB493300872C6C /* AuthenticatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D9424AB493300872C6C /* AuthenticatorView.swift */; };
+		3E81BA7024AB4D0900117C02 /* AuthenticatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */; };
+		3E81BA7124AB4D0900117C02 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */; };
+		3E81BA7224AB4D0900117C02 /* AuthenticatorRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */; };
+		3E81BA7324AB4D0900117C02 /* HeaderBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */; };
+		3E81BA7524AB677700117C02 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7424AB677700117C02 /* ManualView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30954C8651F79BAE4AB49209 /* Pods-CockatooOTP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.debug.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.debug.xcconfig"; sourceTree = "<group>"; };
 		3E273D6A24AB2C3400872C6C /* CockatooOTP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CockatooOTP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E273D6D24AB2C3400872C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E273D6F24AB2C3400872C6C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3E273D7124AB2C3400872C6C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3E273D7324AB2C3500872C6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E273D7624AB2C3500872C6C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3E273D7924AB2C3500872C6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E273D7B24AB2C3500872C6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E273D8124AB478600872C6C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		3E273D8424AB47ED00872C6C /* testdata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testdata.json; sourceTree = "<group>"; };
+		3E273D8724AB48E200872C6C /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		3E273D8824AB48E200872C6C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		3E273D9324AB493300872C6C /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3E273D9424AB493300872C6C /* AuthenticatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorView.swift; sourceTree = "<group>"; };
+		3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorList.swift; sourceTree = "<group>"; };
+		3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorRow.swift; sourceTree = "<group>"; };
+		3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBar.swift; sourceTree = "<group>"; };
+		3E81BA7424AB677700117C02 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
+		66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CockatooOTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.release.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D431BB1E610CB5C6FA3D99D /* Pods_CockatooOTP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +67,8 @@
 			children = (
 				3E273D6C24AB2C3400872C6C /* CockatooOTP */,
 				3E273D6B24AB2C3400872C6C /* Products */,
+				B684C015DF60F537C3021C2E /* Pods */,
+				F2125DE82A2D9BBAE35B9DD8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,13 +83,16 @@
 		3E273D6C24AB2C3400872C6C /* CockatooOTP */ = {
 			isa = PBXGroup;
 			children = (
+				3E273D8C24AB490300872C6C /* UI */,
 				3E273D6D24AB2C3400872C6C /* AppDelegate.swift */,
+				3E273D8B24AB48E700872C6C /* Models */,
+				3E273D8624AB47F500872C6C /* Resources */,
 				3E273D6F24AB2C3400872C6C /* SceneDelegate.swift */,
-				3E273D7124AB2C3400872C6C /* ContentView.swift */,
 				3E273D7324AB2C3500872C6C /* Assets.xcassets */,
 				3E273D7824AB2C3500872C6C /* LaunchScreen.storyboard */,
 				3E273D7B24AB2C3500872C6C /* Info.plist */,
 				3E273D7524AB2C3500872C6C /* Preview Content */,
+				3E273D8324AB478B00872C6C /* Utilities */,
 			);
 			path = CockatooOTP;
 			sourceTree = "<group>";
@@ -75,6 +105,78 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		3E273D8324AB478B00872C6C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3E273D8124AB478600872C6C /* TimeManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3E273D8624AB47F500872C6C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E273D8424AB47ED00872C6C /* testdata.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3E273D8B24AB48E700872C6C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3E273D8824AB48E200872C6C /* Account.swift */,
+				3E273D8724AB48E200872C6C /* Data.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3E273D8C24AB490300872C6C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3E273D8E24AB491100872C6C /* Components */,
+				3E273D8D24AB490900872C6C /* Screen */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		3E273D8D24AB490900872C6C /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				3E273D9424AB493300872C6C /* AuthenticatorView.swift */,
+				3E81BA7424AB677700117C02 /* ManualView.swift */,
+				3E273D9324AB493300872C6C /* ContentView.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		3E273D8E24AB491100872C6C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */,
+				3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */,
+				3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */,
+				3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B684C015DF60F537C3021C2E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				30954C8651F79BAE4AB49209 /* Pods-CockatooOTP.debug.xcconfig */,
+				A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F2125DE82A2D9BBAE35B9DD8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +184,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E273D7E24AB2C3500872C6C /* Build configuration list for PBXNativeTarget "CockatooOTP" */;
 			buildPhases = (
+				BCF5B1F32519DBD216CF946D /* [CP] Check Pods Manifest.lock */,
 				3E273D6624AB2C3400872C6C /* Sources */,
 				3E273D6724AB2C3400872C6C /* Frameworks */,
 				3E273D6824AB2C3400872C6C /* Resources */,
+				689BEF67A1A09B61320A4626 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,10 +240,53 @@
 				3E273D7A24AB2C3500872C6C /* LaunchScreen.storyboard in Resources */,
 				3E273D7724AB2C3500872C6C /* Preview Assets.xcassets in Resources */,
 				3E273D7424AB2C3500872C6C /* Assets.xcassets in Resources */,
+				3E273D8524AB47ED00872C6C /* testdata.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		689BEF67A1A09B61320A4626 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCF5B1F32519DBD216CF946D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CockatooOTP-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3E273D6624AB2C3400872C6C /* Sources */ = {
@@ -147,8 +294,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E273D6E24AB2C3400872C6C /* AppDelegate.swift in Sources */,
+				3E81BA7024AB4D0900117C02 /* AuthenticatorList.swift in Sources */,
+				3E81BA7224AB4D0900117C02 /* AuthenticatorRow.swift in Sources */,
+				3E273D9624AB493300872C6C /* AuthenticatorView.swift in Sources */,
+				3E273D8924AB48E300872C6C /* Data.swift in Sources */,
+				3E81BA7124AB4D0900117C02 /* ProgressBar.swift in Sources */,
 				3E273D7024AB2C3400872C6C /* SceneDelegate.swift in Sources */,
-				3E273D7224AB2C3400872C6C /* ContentView.swift in Sources */,
+				3E81BA7324AB4D0900117C02 /* HeaderBar.swift in Sources */,
+				3E81BA7524AB677700117C02 /* ManualView.swift in Sources */,
+				3E273D9524AB493300872C6C /* ContentView.swift in Sources */,
+				3E273D8224AB478600872C6C /* TimeManager.swift in Sources */,
+				3E273D8A24AB48E300872C6C /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +438,7 @@
 		};
 		3E273D7F24AB2C3500872C6C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30954C8651F79BAE4AB49209 /* Pods-CockatooOTP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -295,6 +452,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumink.CockatooOTP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -302,6 +460,7 @@
 		};
 		3E273D8024AB2C3500872C6C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -315,6 +474,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumink.CockatooOTP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
