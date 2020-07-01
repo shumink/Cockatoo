@@ -11,6 +11,11 @@ import SwiftUI
 struct HeaderBar: View {
     @State var query:String = ""
     @State var showAddMenu: Bool = false
+    @State var isMainActionPresented = false
+    @State var isActionViewPresented = false
+    @State var actionViewMode = ActionViewMode.qr
+
+    
     var body: some View {
         
         HStack {
@@ -28,9 +33,15 @@ struct HeaderBar: View {
             }) {
                 Image(systemName: "plus")
             }.actionSheet(isPresented: self.$showAddMenu) {
-                ActionSheet(title: Text("Where do you want to import from?"), buttons: [.default(Text("QR Code")),
-                     .default(Text("Manual")),
-                     .destructive(Text("Cancel"))])
+                ActionSheet(title: Text("Where do you want to import from?"), buttons: [.default(Text("QR Code"), action: {
+                                self.actionViewMode = .qr
+                                self.isActionViewPresented = true}),
+                             .default(Text("Manual"), action: {
+                                self.actionViewMode = .manual
+                                self.isActionViewPresented = true}),
+                             .destructive(Text("Cancel"))])
+            }.sheet(isPresented: $isActionViewPresented) {
+                self.actionViewMode.view
             }
             
             
@@ -40,6 +51,21 @@ struct HeaderBar: View {
         
     }
 }
+
+enum ActionViewMode {
+    case qr
+    case manual
+}
+
+extension ActionViewMode {
+    var view: some View {
+        switch self {
+            case .qr: return ManualView()
+            case .manual: return ManualView()
+        }
+    }
+}
+
 
 struct HeaderBar_Previews: PreviewProvider {
     static var previews: some View {

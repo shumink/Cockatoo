@@ -24,6 +24,7 @@
 		3E81BA7224AB4D0900117C02 /* AuthenticatorRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */; };
 		3E81BA7324AB4D0900117C02 /* HeaderBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */; };
 		3E81BA7524AB677700117C02 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7424AB677700117C02 /* ManualView.swift */; };
+		3E81BA7724ACB38C00117C02 /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7624ACB38C00117C02 /* AccountsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorRow.swift; sourceTree = "<group>"; };
 		3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBar.swift; sourceTree = "<group>"; };
 		3E81BA7424AB677700117C02 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
+		3E81BA7624ACB38C00117C02 /* AccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsManager.swift; sourceTree = "<group>"; };
 		66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CockatooOTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.release.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				3E273D8124AB478600872C6C /* TimeManager.swift */,
+				3E81BA7624ACB38C00117C02 /* AccountsManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				3E81BA7124AB4D0900117C02 /* ProgressBar.swift in Sources */,
 				3E273D7024AB2C3400872C6C /* SceneDelegate.swift in Sources */,
 				3E81BA7324AB4D0900117C02 /* HeaderBar.swift in Sources */,
+				3E81BA7724ACB38C00117C02 /* AccountsManager.swift in Sources */,
 				3E81BA7524AB677700117C02 /* ManualView.swift in Sources */,
 				3E273D9524AB493300872C6C /* ContentView.swift in Sources */,
 				3E273D8224AB478600872C6C /* TimeManager.swift in Sources */,

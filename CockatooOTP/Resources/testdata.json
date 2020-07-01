@@ -5,6 +5,7 @@
         "key": "askoluxg5jl4ryempl34o7x7g3qyqfdq",
         "interval": 30,
         "digits": 6,
+        "id": "0111e333-96a2-456a-ae72-a85bb6e850bc",
     },
     {
         "service": "ProtonMail",
@@ -12,6 +13,7 @@
         "key": "7xibo5hyp2kiriclbn6wryksekwaypjj",
         "interval": 10,
         "digits": 6,
+        "id": "989d53f1-62bd-48b7-9a91-17d4dc052dd8",
     },
     {
         "service": "Tutanota",
@@ -19,6 +21,7 @@
         "key": "ypxidqgov7ojvfkcdnoa6liz7ewdduj4",
         "interval": 30,
         "digits": 6,
+        "id": "503d4836-5b16-4032-9460-9a8e67c327c8",
     },
     {
         "service": "Google",
@@ -26,6 +29,7 @@
         "key": "7mosptk3y3rdooiongkdoqbnwlef25sf",
         "interval": 30,
         "digits": 6,
+        "id": "30d6f63e-2340-4c1e-a32f-335428658f8c",
     },
 ]
 

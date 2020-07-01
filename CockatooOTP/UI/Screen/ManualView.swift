@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-
+import SwiftOTP
 
 struct ManualView: View {
     @State var service: String = ""
@@ -16,7 +16,16 @@ struct ManualView: View {
     @State var key: String = ""
     @State var interval: String = ""
     @State var digits: String = ""
+    @State var warning: String = ""
+    let invalidKeyWarning: String = "Your secret key is invalid."
     
+    var canSave: Bool {
+        return service != "" &&
+            account != "" &&
+            key != "" &&
+            interval != "" &&
+            digits != ""
+    }
     
     func save()  {
         if self.interval == "" {
@@ -36,14 +45,23 @@ struct ManualView: View {
         NavigationView {
         
             Form {
-                Section (header:Text("Your Account Information")) {
+                Section (header:Text("Your Account Information"), footer: Text(warning).foregroundColor(Color.red)) {
                     TextField("Service", text: $service)
                     TextField("Account", text: $account)
                     SecureField("Secret Key", text: $key)
+                    .onReceive(Just(key)) { newValue in
+                        let data = base32DecodeToData(newValue.replacingOccurrences(of: " ", with: ""))
+                        if data == nil {
+                            self.warning = self.invalidKeyWarning
+                        } else {
+                            self.warning = ""
+                            self.key = newValue
+                        }
+                    }
                 }
                 Section (header:Text("Advance")) {
                     TextField("Interval", text: $interval)
-                        .keyboardType(.numberPad)
+//                        .keyboardType(.numberPad)
                         .onReceive(Just(interval)) { newValue in
                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                 if filtered != newValue {
@@ -51,7 +69,7 @@ struct ManualView: View {
                                 }
                         }
                     TextField("Digits", text: $digits)
-                        .keyboardType(.numberPad)
+//                        .keyboardType(.numberPad)
                         .onReceive(Just(digits)) { newValue in
                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                 if filtered != newValue {
@@ -64,7 +82,7 @@ struct ManualView: View {
                 Section {
                     Button(action: self.save) {
                         Text("Save")
-                    }
+                    }.disabled(!canSave)
 
                 }
             }
