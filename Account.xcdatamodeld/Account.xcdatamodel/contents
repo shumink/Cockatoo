@@ -8,8 +8,9 @@
         <attribute name="interval" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="key" optional="YES" attributeType="String"/>
         <attribute name="service" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="-18" width="128" height="148"/>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="163"/>
     </elements>
 </model>

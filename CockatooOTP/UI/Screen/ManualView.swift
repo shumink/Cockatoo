@@ -19,6 +19,7 @@ struct ManualView: View {
     @State var digits: String = ""
     @State var warning: String = ""
     @Environment(\.managedObjectContext) var managedObjectContext
+    var callback: () -> Void
     
     let invalidKeyWarning: String = "Your secret key is invalid."
     
@@ -46,18 +47,16 @@ struct ManualView: View {
         newAccount.account = account
         newAccount.key = key
         newAccount.interval = Int16(interval)!
+        newAccount.type = "totp"
         newAccount.digits = Int16(digits)!
         newAccount.createdTime = Date()
-        // 3
         do {
             try managedObjectContext.save()
             print("saved")
         } catch {
             print("Error saving managed object context: \(error)")
         }
-//        
-//        let newAccount = Account(service: service, account: account, key: key, interval: Int(interval)!, digits: Int(digits)!)
-//        accountData.append(newAccount) 
+        callback()
 
     }
 
@@ -79,7 +78,7 @@ struct ManualView: View {
                         }
                     }
                 }
-                Section (header:Text("Advance")) {
+                Section (header:Text("Advanced")) {
                     TextField("Interval", text: $interval)
 //                        .keyboardType(.numberPad)
                         .onReceive(Just(interval)) { newValue in
@@ -89,7 +88,6 @@ struct ManualView: View {
                                 }
                         }
                     TextField("Digits", text: $digits)
-//                        .keyboardType(.numberPad)
                         .onReceive(Just(digits)) { newValue in
                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                 if filtered != newValue {
@@ -105,13 +103,13 @@ struct ManualView: View {
                     }.disabled(!canSave)
 
                 }
-            }
+            }.navigationBarTitle("New Account", displayMode: .inline)
         }
     }
 }
 
 struct ManualView_Previews: PreviewProvider {
     static var previews: some View {
-        ManualView()
+        ManualView(callback: {})
     }
 }

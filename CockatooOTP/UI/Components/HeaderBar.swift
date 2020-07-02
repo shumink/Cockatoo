@@ -7,12 +7,16 @@
 //
 
 import SwiftUI
+import CodeScanner
+import os
 
 struct HeaderBar: View {
     @State var query:String = ""
     @State var showAddMenu: Bool = false
-    @State var isMainActionPresented = false
     @State var isActionViewPresented = false
+    @State var alertText:String = ""
+    @State var isAlertPresented = false
+    @State var data: [String:String] = ["":""]
     @State var actionViewMode = ActionViewMode.qr
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -34,15 +38,32 @@ struct HeaderBar: View {
                 Image(systemName: "plus")
             }.actionSheet(isPresented: self.$showAddMenu) {
                 ActionSheet(title: Text("Where do you want to import from?"), buttons: [.default(Text("QR Code"), action: {
-                                self.actionViewMode = .qr
-                                self.isActionViewPresented = true}),
-                             .default(Text("Manual"), action: {
-                                self.actionViewMode = .manual
-//                                self.actionViewMode
-                                self.isActionViewPresented = true}),
-                             .destructive(Text("Cancel"))])
+                        self.actionViewMode = .qr
+                        self.isActionViewPresented = true}),
+                     .default(Text("Manual"), action: {
+                        self.actionViewMode = .manual
+                        self.isActionViewPresented = true}),
+                     .destructive(Text("Cancel"))])
             }.sheet(isPresented: $isActionViewPresented) {
-                self.actionViewMode.view.environment(\.managedObjectContext, self.managedObjectContext)
+                if self.actionViewMode == .manual {
+                    ManualView(callback: {
+                        self.isActionViewPresented = false
+                    }).environment(\.managedObjectContext, self.managedObjectContext)
+                } else if self.actionViewMode == .qr {
+                    CodeScannerView(codeTypes: [.qr], completion: self.handleScan)
+                } else {
+                    ManualView(service: self.data["issuer"]!,
+                               account: self.data["path"]!,
+                               key: self.data["secret"]!,
+                               interval: self.data["period"]!,
+                               digits: self.data["digits"]!,
+                               callback: {
+                                   self.isActionViewPresented = false
+                               })
+                        .environment(\.managedObjectContext, self.managedObjectContext)
+                }
+            }.alert(isPresented: $isAlertPresented) {
+                Alert(title: Text("Scanning Error"), message: Text(self.alertText), dismissButton: .default(Text("OK")))
             }
             
             
@@ -51,25 +72,93 @@ struct HeaderBar: View {
         .padding()
         
     }
+    
+    func handleScan(result: Result<String, CodeScannerView.ScanError>) {
+        self.isActionViewPresented = false
+        switch result {
+            case .success(let code):
+                print(code)
+                self.data = validate(code: code)
+                if self.data != [:] {
+                    self.actionViewMode = .qrDone
+                    self.isActionViewPresented = true
+                } else {
+                    self.isActionViewPresented = false
+                    self.isAlertPresented = true
+                }
+            case .failure(let error):
+                print(error)
+                print("Scanning failed")
+        }
+    }
+    
+    func validate(code: String ) -> [String:String]  {
+        guard let url = URL(string:code) else {
+            self.alertText = "Invalid QR code."
+            self.isActionViewPresented = false
+            self.isAlertPresented = true
+            return [:]
+
+        }
+        let data = url.params()
+        var result = [String:String]()
+        print(data)
+        guard data["issuer"] != nil else {
+            self.alertText = "Invalid issuer."
+            return [:]
+        }
+        result["issuer"] = data["issuer"] as? String
+        
+        guard data["path"] != nil else {
+            self.alertText = "Invalid path."
+            return [:]
+        }
+        result["path"] = data["path"] as? String
+        result["path"]?.removeFirst()
+        
+        guard data["secret"] != nil else {
+            self.alertText = "Invalid key."
+            return [:]
+        }
+        result["secret"] = data["secret"] as? String
+
+        if data["period"] == nil || NumberFormatter().number(from: data["period"] as! String) == nil {
+            result["period"] = "30"
+        } else {
+            result["period"] = data["period"] as? String
+        }
+        
+        if data["digits"] == nil || NumberFormatter().number(from: data["digits"] as! String) == nil {
+            result["digits"] = "6"
+        } else {
+            result["digits"] = data["digits"] as? String
+        }
+        print("result")
+
+        print(result)
+        print(type(of: result))
+        return result
+    }
 }
 
 enum ActionViewMode {
     case qr
     case manual
+    case qrDone
 }
+//CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
+//extension ActionViewMode {
+//    var view: some View {
+//        switch self {
+//            case .qr: return ManualView()
+//            case .manual: return ManualView()
+//        }
+//    }
+//}
 
-extension ActionViewMode {
-    var view: some View {
-        switch self {
-            case .qr: return ManualView()
-            case .manual: return ManualView()
-        }
-    }
-}
 
-
-struct HeaderBar_Previews: PreviewProvider {
-    static var previews: some View {
-        HeaderBar()
-    }
-}
+//struct HeaderBar_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HeaderBar()
+//    }
+//}

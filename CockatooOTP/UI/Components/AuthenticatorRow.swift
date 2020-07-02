@@ -12,7 +12,6 @@ import SwiftOTP
 
 struct AuthenticatorRow: View {
     var account: Account
-//    var time: UInt64
     @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
     
@@ -22,10 +21,8 @@ struct AuthenticatorRow: View {
             HStack {
                 
                 VStack(alignment: .leading) {
-//                    Text(account.service)
                     account.service.map(Text.init)
                     Spacer()
-//                    Text(account.account)
                     account.account.map(Text.init)
                     
                 }
