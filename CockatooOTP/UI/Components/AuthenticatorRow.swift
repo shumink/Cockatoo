@@ -6,28 +6,38 @@
 //  Copyright © 2020 Shumin Kong. All rights reserved.
 //
 
+import CoreData
 import SwiftUI
+import SwiftOTP
 
 struct AuthenticatorRow: View {
     var account: Account
 //    var time: UInt64
     @EnvironmentObject var timeManager: TimeManager
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     var body: some View {
         
         VStack {
             HStack {
                 
                 VStack(alignment: .leading) {
-                    Text(account.service)
+//                    Text(account.service)
+                    account.service.map(Text.init)
                     Spacer()
-                    Text(account.account)
+//                    Text(account.account)
+                    account.account.map(Text.init)
                     
                 }
                 Spacer()
-                Text(account.getOTP(time: self.timeManager.unixEpochTime)).font(.title)
+                Text(getOTP(key: account.key!,
+                            interval: account.interval,
+                            digits: account.digits,
+                            time: Int(timeManager.unixEpochTime)))
+                    .font(.title)
 
             }
-            ProgressBar(progress: account.progress(time: timeManager.unixEpochTimeBinding))
+            ProgressBar(progress: getProgress(time: timeManager.date.timeIntervalSince1970, interval: account.interval))
 
         }.padding()
         .contextMenu {
@@ -39,23 +49,34 @@ struct AuthenticatorRow: View {
 
             Button(action: {
                 print("Delete")
+                self.managedObjectContext.delete(self.account)
+                
             }) {
                 Text("Delete")
             }
-
-            
         }
-        
-        
     }
-    
-
 }
 
-struct AuthenticatorRow_Previews: PreviewProvider {
-    static var previews: some View {
-        AuthenticatorRow(account:accountData[1])
-            .environmentObject(TimeManager())
+func getOTP(key:String, interval: Int16, digits: Int16, time: Int) -> String {
+    guard let data = base32DecodeToData(key.replacingOccurrences(of: " ", with: "")) else {
+        print(key)
+        return "Invalid key"
+
     }
+    
+    guard let totp = TOTP(secret: data, digits: Int(digits), timeInterval:
+        Int(interval)) else {
+         return "Invalid key"
+    }
+    guard let otpString = totp.generate(secondsPast1970: time) else { return "Error" }
+    return otpString
+    
+}
+
+func getProgress(time: Double, interval:Int16) -> Float {
+//    let multiplies = Int(time) / (Int(time) % Int(interval))
+//    return Float(time - Double(multiplies * Int(interval)))
+    return Float(Int(time) % Int(interval)) / Float(interval)
 }
 

@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 import SwiftOTP
+import CoreData
 
 struct ManualView: View {
     @State var service: String = ""
@@ -17,6 +18,8 @@ struct ManualView: View {
     @State var interval: String = ""
     @State var digits: String = ""
     @State var warning: String = ""
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     let invalidKeyWarning: String = "Your secret key is invalid."
     
     var canSave: Bool {
@@ -24,7 +27,8 @@ struct ManualView: View {
             account != "" &&
             key != "" &&
             interval != "" &&
-            digits != ""
+            digits != "" &&
+            warning == ""
     }
     
     func save()  {
@@ -36,8 +40,24 @@ struct ManualView: View {
             self.digits = "6"
         }
         
-        let newAccount = Account(service: service, account: account, key: key, interval: Int(interval)!, digits: Int(digits)!)
-        accountData.append(newAccount) 
+        let newAccount = Account(context: managedObjectContext)
+        newAccount.id = UUID()
+        newAccount.service = service
+        newAccount.account = account
+        newAccount.key = key
+        newAccount.interval = Int16(interval)!
+        newAccount.digits = Int16(digits)!
+        newAccount.createdTime = Date()
+        // 3
+        do {
+            try managedObjectContext.save()
+            print("saved")
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+//        
+//        let newAccount = Account(service: service, account: account, key: key, interval: Int(interval)!, digits: Int(digits)!)
+//        accountData.append(newAccount) 
 
     }
 

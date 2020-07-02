@@ -16,7 +16,6 @@
 		3E273D8224AB478600872C6C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8124AB478600872C6C /* TimeManager.swift */; };
 		3E273D8524AB47ED00872C6C /* testdata.json in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D8424AB47ED00872C6C /* testdata.json */; };
 		3E273D8924AB48E300872C6C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8724AB48E200872C6C /* Data.swift */; };
-		3E273D8A24AB48E300872C6C /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8824AB48E200872C6C /* Account.swift */; };
 		3E273D9524AB493300872C6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D9324AB493300872C6C /* ContentView.swift */; };
 		3E273D9624AB493300872C6C /* AuthenticatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D9424AB493300872C6C /* AuthenticatorView.swift */; };
 		3E81BA7024AB4D0900117C02 /* AuthenticatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */; };
@@ -25,6 +24,7 @@
 		3E81BA7324AB4D0900117C02 /* HeaderBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */; };
 		3E81BA7524AB677700117C02 /* ManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7424AB677700117C02 /* ManualView.swift */; };
 		3E81BA7724ACB38C00117C02 /* AccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7624ACB38C00117C02 /* AccountsManager.swift */; };
+		3E81BA7C24AD5AA000117C02 /* Account.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7B24AD5AA000117C02 /* Account.xcdatamodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,6 @@
 		3E273D8124AB478600872C6C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		3E273D8424AB47ED00872C6C /* testdata.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = testdata.json; sourceTree = "<group>"; };
 		3E273D8724AB48E200872C6C /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		3E273D8824AB48E200872C6C /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		3E273D9324AB493300872C6C /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3E273D9424AB493300872C6C /* AuthenticatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorView.swift; sourceTree = "<group>"; };
 		3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorList.swift; sourceTree = "<group>"; };
@@ -48,6 +47,7 @@
 		3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderBar.swift; sourceTree = "<group>"; };
 		3E81BA7424AB677700117C02 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		3E81BA7624ACB38C00117C02 /* AccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsManager.swift; sourceTree = "<group>"; };
+		3E81BA7B24AD5AA000117C02 /* Account.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Account.xcdatamodel; path = Account.xcdatamodeld/Account.xcdatamodel; sourceTree = SOURCE_ROOT; };
 		66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CockatooOTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.release.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +127,7 @@
 		3E273D8B24AB48E700872C6C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E273D8824AB48E200872C6C /* Account.swift */,
+				3E81BA7B24AD5AA000117C02 /* Account.xcdatamodel */,
 				3E273D8724AB48E200872C6C /* Data.swift */,
 			);
 			path = Models;
@@ -305,10 +305,10 @@
 				3E273D7024AB2C3400872C6C /* SceneDelegate.swift in Sources */,
 				3E81BA7324AB4D0900117C02 /* HeaderBar.swift in Sources */,
 				3E81BA7724ACB38C00117C02 /* AccountsManager.swift in Sources */,
+				3E81BA7C24AD5AA000117C02 /* Account.xcdatamodel in Sources */,
 				3E81BA7524AB677700117C02 /* ManualView.swift in Sources */,
 				3E273D9524AB493300872C6C /* ContentView.swift in Sources */,
 				3E273D8224AB478600872C6C /* TimeManager.swift in Sources */,
-				3E273D8A24AB48E300872C6C /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

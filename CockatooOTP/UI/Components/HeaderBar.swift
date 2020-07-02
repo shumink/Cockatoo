@@ -14,7 +14,7 @@ struct HeaderBar: View {
     @State var isMainActionPresented = false
     @State var isActionViewPresented = false
     @State var actionViewMode = ActionViewMode.qr
-
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         
@@ -38,10 +38,11 @@ struct HeaderBar: View {
                                 self.isActionViewPresented = true}),
                              .default(Text("Manual"), action: {
                                 self.actionViewMode = .manual
+//                                self.actionViewMode
                                 self.isActionViewPresented = true}),
                              .destructive(Text("Cancel"))])
             }.sheet(isPresented: $isActionViewPresented) {
-                self.actionViewMode.view
+                self.actionViewMode.view.environment(\.managedObjectContext, self.managedObjectContext)
             }
             
             
