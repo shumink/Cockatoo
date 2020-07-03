@@ -56,11 +56,13 @@ struct HeaderBar: View {
                 } else if self.actionViewMode == .qr {
                     CodeScannerView(codeTypes: [.qr], completion: self.handleScan)
                 } else {
-                    ManualView(service: self.data["issuer"]!,
+                    ManualView(selectedType: (self.data["host"]! == "totp" ? 0:1),
+                               service: self.data["issuer"]! ,
                                account: self.data["path"]!,
                                key: self.data["secret"]!,
                                interval: self.data["period"]!,
                                digits: self.data["digits"]!,
+                               counter: self.data["counter"]!,
                                callback: {
                                    self.isActionViewPresented = false
                                })
@@ -107,6 +109,13 @@ struct HeaderBar: View {
         let data = url.params()
         var result = [String:String]()
         print(data)
+        guard data["host"] != nil else {
+            self.alertText = "Invalid authentication."
+            return [:]
+        }
+        result["host"] = data["host"] as? String
+
+        
         guard data["issuer"] != nil else {
             self.alertText = "Invalid issuer."
             return [:]
@@ -136,6 +145,12 @@ struct HeaderBar: View {
             result["digits"] = "6"
         } else {
             result["digits"] = data["digits"] as? String
+        }
+        
+        if data["counter"] == nil || NumberFormatter().number(from: data["counter"] as! String) == nil {
+            result["counter"] = "0"
+        } else {
+            result["counter"] = data["counter"] as? String
         }
         print("result")
 

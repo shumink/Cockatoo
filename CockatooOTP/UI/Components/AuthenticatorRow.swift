@@ -18,26 +18,44 @@ struct AuthenticatorRow: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
-//        Divider()
-//        if visible {
         VStack {
-            
             if visible {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(account.service!).lineLimit(1)
+                        if account.type == "totp" {
+                            Text(account.service!).lineLimit(1)
+                        } else {
+                            HStack {
+                                Text(account.service!).lineLimit(1)
+                                Button(action: {}) {
+                                    Image(systemName: "arrow.counterclockwise")
+                                }.onTapGesture {
+                                    self.account.counter += 1
+                                    do {
+                                        try self.managedObjectContext.save()
+                                    } catch {
+                                        print("counter increment won't save")
+                                    }
+
+                                }
+
+                            }
+                        }
                         Spacer()
                         Text(account.account!).lineLimit(1)
                     }
                     Spacer()
-                    Text(getOTP(key: account.key!,
-                                interval: account.interval,
-                                digits: account.digits,
+                    Text(getOTP(account: account,
                                 time: Int(timeManager.unixEpochTime)))
                         .font(.title)
-                        
+                        .animation(.easeInOut)
                 }
-                ProgressBar(progress: getProgress(time: timeManager.date.timeIntervalSince1970, interval: account.interval)).frame(height:10)
+                if account.type == "totp" {
+                    ProgressBar(progress: getProgress(time: timeManager.date.timeIntervalSince1970, interval: account.interval)).frame(height:10)
+                } else {
+                    Spacer().frame(height:10)
+                }
+                
             }
 
         }
@@ -58,10 +76,7 @@ struct AuthenticatorRow: View {
                         self.visible.toggle()
                         self.managedObjectContext.delete(self.account)
                    }
-
                 }
-
-                
             }) {
                 Text("Delete")
             }
@@ -69,23 +84,32 @@ struct AuthenticatorRow: View {
     }
 }
 
-func getOTP(key:String, interval: Int16, digits: Int16, time: Int) -> String {
-    guard let data = base32DecodeToData(key.replacingOccurrences(of: " ", with: "")) else {
-        print(key)
+func getOTP(account: Account, time: Int) -> String {
+    guard let data = base32DecodeToData((account.key!.replacingOccurrences(of: " ", with: ""))) else {
+        print(account.key!)
         return "Invalid key"
 
     }
-    if interval <= 0 || digits <= 0 {
+    if account.interval <= 0 || account.digits <= 0 {
         return "Invalid interval"
     }
-    guard let totp = TOTP(secret: data, digits: Int(digits), timeInterval:
-        Int(interval)) else {
-         return "Invalid key"
+    
+    if account.type == "totp" {
+        guard let totp = TOTP(secret: data, digits: Int(account.digits), timeInterval:
+            Int(account.interval)) else {
+             return "Invalid key"
+        }
+        guard let otpString = totp.generate(secondsPast1970: time) else { return "Error" }
+        return otpString
+    } else {
+        guard let hotp = HOTP(secret: data, digits: Int(account.digits)) else {
+             return "Invalid key"
+        }
+        guard let otpString = hotp.generate(counter: UInt64(account.counter)) else { return "Error" }
+        return otpString
+
     }
     
-    
-    guard let otpString = totp.generate(secondsPast1970: time) else { return "Error" }
-    return otpString
     
 }
 

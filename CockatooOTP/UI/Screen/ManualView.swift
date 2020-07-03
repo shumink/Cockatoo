@@ -12,11 +12,15 @@ import SwiftOTP
 import CoreData
 
 struct ManualView: View {
+    var types = ["totp", "hotp"]
+    @State var selectedType = 0
     @State var service: String = ""
+//    @State var type: String = ""
     @State var account: String = ""
     @State var key: String = ""
     @State var interval: String = ""
     @State var digits: String = ""
+    @State var counter: String = ""
     @State var warning: String = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     var callback: () -> Void
@@ -52,10 +56,12 @@ struct ManualView: View {
         newAccount.account = account
         newAccount.key = key
         newAccount.interval = Int16(interval)!
-        newAccount.type = "totp"
+        newAccount.type = types[selectedType]
         newAccount.digits = Int16(digits)!
+        newAccount.counter = Int64(counter)!
         newAccount.createdTime = Date()
         do {
+            
             try managedObjectContext.save()
             print("saved")
         } catch {
@@ -66,10 +72,16 @@ struct ManualView: View {
     }
 
     var body: some View {
-//        NavigationView {
+        NavigationView {
         
             Form {
                 Section (header:Text("Your Account Information"), footer: Text(warning).foregroundColor(Color.red)) {
+                    Picker(selection: $selectedType, label: Text("Type")) {
+                       ForEach(0 ..< types.count) {
+                        Text(self.types[$0].uppercased())
+                       }
+                    }
+
                     TextField("Service", text: $service)
                     TextField("Account", text: $account)
                     SecureField("Secret Key", text: $key)
@@ -84,13 +96,25 @@ struct ManualView: View {
                     }
                 }
                 Section (header:Text("Advanced")) {
-                    TextField("Interval", text: $interval)
-                        .onReceive(Just(interval)) { newValue in
-                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                if filtered != newValue {
-                                    self.interval = filtered
-                                }
-                        }
+                    if self.selectedType == 0 {
+                        TextField("Interval", text: $interval)
+                            .onReceive(Just(interval)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        self.interval = filtered
+                                    }
+                            }
+
+                    } else {
+                        TextField("Counter", text: $counter)
+                            .onReceive(Just(counter)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        self.counter = filtered
+                                    }
+                            }
+
+                    }
                     TextField("Digits", text: $digits)
                         .onReceive(Just(digits)) { newValue in
                                 let filtered = newValue.filter { "0123456789".contains($0) }
@@ -98,8 +122,6 @@ struct ManualView: View {
                                     self.digits = filtered
                                 }
                         }
-
-
                 }
                 Section {
                     Button(action: self.save) {
@@ -108,8 +130,7 @@ struct ManualView: View {
 
                 }
             }
-//            .navigationBarTitle("New Account", displayMode: .inline)
-//        }
+        }
     }
 }
 
