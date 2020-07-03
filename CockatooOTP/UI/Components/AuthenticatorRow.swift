@@ -12,41 +12,55 @@ import SwiftOTP
 
 struct AuthenticatorRow: View {
     var account: Account
+    @State var visible: Bool = true
+    @State var border: Color = Color.gray
     @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
-        
+//        Divider()
+//        if visible {
         VStack {
-            HStack {
-                
-                VStack(alignment: .leading) {
-                    account.service.map(Text.init)
+            
+            if visible {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(account.service!).lineLimit(1)
+                        Spacer()
+                        Text(account.account!).lineLimit(1)
+                    }
                     Spacer()
-                    account.account.map(Text.init)
-                    
+                    Text(getOTP(key: account.key!,
+                                interval: account.interval,
+                                digits: account.digits,
+                                time: Int(timeManager.unixEpochTime)))
+                        .font(.title)
+                        
                 }
-                Spacer()
-                Text(getOTP(key: account.key!,
-                            interval: account.interval,
-                            digits: account.digits,
-                            time: Int(timeManager.unixEpochTime)))
-                    .font(.title)
-
+                ProgressBar(progress: getProgress(time: timeManager.date.timeIntervalSince1970, interval: account.interval)).frame(height:10)
             }
-            ProgressBar(progress: getProgress(time: timeManager.date.timeIntervalSince1970, interval: account.interval))
 
-        }.padding()
+        }
+        .animation(.easeInOut)
+        .transition(.opacity)
+        .padding()
+        .border(Color.gray)
+
         .contextMenu {
             Button(action: {
                 print("Favorite")
             }) {
                 Text("Favorite")
             }
-
             Button(action: {
-                print("Delete")
-                self.managedObjectContext.delete(self.account)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation {
+                        self.visible.toggle()
+                        self.managedObjectContext.delete(self.account)
+                   }
+
+                }
+
                 
             }) {
                 Text("Delete")
@@ -61,19 +75,24 @@ func getOTP(key:String, interval: Int16, digits: Int16, time: Int) -> String {
         return "Invalid key"
 
     }
-    
+    if interval <= 0 || digits <= 0 {
+        return "Invalid interval"
+    }
     guard let totp = TOTP(secret: data, digits: Int(digits), timeInterval:
         Int(interval)) else {
          return "Invalid key"
     }
+    
+    
     guard let otpString = totp.generate(secondsPast1970: time) else { return "Error" }
     return otpString
     
 }
 
 func getProgress(time: Double, interval:Int16) -> Float {
-//    let multiplies = Int(time) / (Int(time) % Int(interval))
-//    return Float(time - Double(multiplies * Int(interval)))
+    if interval == 0 {
+        return 0
+    }
     return Float(Int(time) % Int(interval)) / Float(interval)
 }
 

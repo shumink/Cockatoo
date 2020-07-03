@@ -11,24 +11,28 @@ import CodeScanner
 import os
 
 struct HeaderBar: View {
-    @State var query:String = ""
+//    @State var query:String = ""
     @State var showAddMenu: Bool = false
     @State var isActionViewPresented = false
+    @State var isSettingViewPresented = false
     @State var alertText:String = ""
     @State var isAlertPresented = false
     @State var data: [String:String] = ["":""]
     @State var actionViewMode = ActionViewMode.qr
+    @Binding var search: String
     @Environment(\.managedObjectContext) var managedObjectContext
     
     var body: some View {
         
         HStack {
             Button(action: {
-                print("Edit button was tapped")
+                self.isSettingViewPresented.toggle()
             }) {
-                Image(systemName: "slider.horizontal.3")
-            }
-            TextField("Search", text:$query)
+                Image(systemName: "gear")
+            }.sheet(isPresented: $isSettingViewPresented, content: {
+                SettingView()
+            })
+            TextField("Search", text:$search)
                 .padding()
                 .cornerRadius(10)
                 .border(Color.secondary)

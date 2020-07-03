@@ -15,6 +15,7 @@
 		3E273D7A24AB2C3500872C6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D7824AB2C3500872C6C /* LaunchScreen.storyboard */; };
 		3E273D8224AB478600872C6C /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D8124AB478600872C6C /* TimeManager.swift */; };
 		3E273D9524AB493300872C6C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D9324AB493300872C6C /* ContentView.swift */; };
+		3E7B202824AEB28100CEFCD6 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B202724AEB28100CEFCD6 /* SettingView.swift */; };
 		3E81BA7024AB4D0900117C02 /* AuthenticatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */; };
 		3E81BA7124AB4D0900117C02 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */; };
 		3E81BA7224AB4D0900117C02 /* AuthenticatorRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */; };
@@ -36,6 +37,7 @@
 		3E273D7B24AB2C3500872C6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E273D8124AB478600872C6C /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		3E273D9324AB493300872C6C /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3E7B202724AEB28100CEFCD6 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorList.swift; sourceTree = "<group>"; };
 		3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticatorRow.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				3E81BA7424AB677700117C02 /* ManualView.swift */,
 				3E273D9324AB493300872C6C /* ContentView.swift */,
+				3E7B202724AEB28100CEFCD6 /* SettingView.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				3E81BA7C24AD5AA000117C02 /* Account.xcdatamodel in Sources */,
 				3E81BA8124ADA35A00117C02 /* Utility.swift in Sources */,
 				3E81BA7524AB677700117C02 /* ManualView.swift in Sources */,
+				3E7B202824AEB28100CEFCD6 /* SettingView.swift in Sources */,
 				3E273D9524AB493300872C6C /* ContentView.swift in Sources */,
 				3E273D8224AB478600872C6C /* TimeManager.swift in Sources */,
 			);

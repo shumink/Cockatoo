@@ -28,7 +28,12 @@ struct ManualView: View {
             account != "" &&
             key != "" &&
             interval != "" &&
+            Int(interval) != nil &&
+            Int(interval) ?? 0 > 0 &&
             digits != "" &&
+            Int(digits) != nil &&
+            Int(digits) ?? 0 > 0 &&
+            Int(digits) ?? 10 < 10  &&
             warning == ""
     }
     
@@ -61,7 +66,7 @@ struct ManualView: View {
     }
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
         
             Form {
                 Section (header:Text("Your Account Information"), footer: Text(warning).foregroundColor(Color.red)) {
@@ -80,7 +85,6 @@ struct ManualView: View {
                 }
                 Section (header:Text("Advanced")) {
                     TextField("Interval", text: $interval)
-//                        .keyboardType(.numberPad)
                         .onReceive(Just(interval)) { newValue in
                                 let filtered = newValue.filter { "0123456789".contains($0) }
                                 if filtered != newValue {
@@ -103,8 +107,9 @@ struct ManualView: View {
                     }.disabled(!canSave)
 
                 }
-            }.navigationBarTitle("New Account", displayMode: .inline)
-        }
+            }
+//            .navigationBarTitle("New Account", displayMode: .inline)
+//        }
     }
 }
 
