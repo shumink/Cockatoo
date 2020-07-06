@@ -10,39 +10,21 @@ import SwiftUI
 import CoreData
 
 struct AuthenticatorList: View {
-//    @FetchRequest(
-//        entity: Account.entity(),
-//                sortDescriptors: [
-//                    NSSortDescriptor(keyPath: \Account.createdTime, ascending: false)
-//                ],
-//                predicate: NSPredicate(format: "service BEGINSWITH %@", "P")
-//
-//    ) var accounts: FetchedResults<Account>
-//    var accounts: FetchedResults<Account>
-//    @Binding var search:String
     var fetchRequest: FetchRequest<Account>
     @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
     
     
     init(search: String) {
-        
-        if search != "" {
-            self.fetchRequest = FetchRequest<Account> (
-                entity: Account.entity(),
-                sortDescriptors: [
-                    NSSortDescriptor(keyPath: \Account.createdTime, ascending: false)
-                ],
-                predicate: NSPredicate(format: "service CONTAINS %@", search)
-            )
-        } else {
-            self.fetchRequest = FetchRequest<Account> (
-                entity: Account.entity(),
-                sortDescriptors: [
-                    NSSortDescriptor(keyPath: \Account.createdTime, ascending: false)
-                ]
-            )
-        }
+        self.fetchRequest = FetchRequest<Account> (
+            entity: Account.entity(),
+            sortDescriptors: [
+                NSSortDescriptor(keyPath: \Account.favTime, ascending: false),
+                NSSortDescriptor(keyPath: \Account.createdTime, ascending: false),
+            ],
+            predicate: search=="" ? nil: NSPredicate(format: "service CONTAINS %@", search)
+        )
+
     }
     
     var body: some View {

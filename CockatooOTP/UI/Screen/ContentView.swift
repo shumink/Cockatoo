@@ -11,29 +11,7 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @State var search:String = ""
-//    @FetchRequest(
-//        entity: Account.entity(),
-//                sortDescriptors: [
-//                    NSSortDescriptor(keyPath: \Account.createdTime, ascending: false)
-//                ]
-//
-//    ) var accounts: FetchedResults<Account>
-    
-//    var fetchRequest: FetchRequest<Account>
-    
-//    init() {
-//        self.fetchRequest = FetchRequest<Account> (
-//            entity: Account.entity(),
-//            sortDescriptors: [
-//                NSSortDescriptor(keyPath: \Account.createdTime, ascending: false)
-//            ],
-//            predicate: NSPredicate(format: "service BEGINSWITH %@", search)
-//        )
-//
-//    }
-
-    
+    @State var search:String = ""    
     @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
         

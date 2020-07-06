@@ -60,6 +60,7 @@ struct ManualView: View {
         newAccount.digits = Int16(digits)!
         newAccount.counter = Int64(counter)!
         newAccount.createdTime = Date()
+        newAccount.favTime = Date(timeIntervalSince1970: 0)
         do {
             
             try managedObjectContext.save()

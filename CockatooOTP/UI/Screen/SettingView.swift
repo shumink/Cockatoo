@@ -11,12 +11,13 @@ import SwiftUI
 struct SettingView: View {
     var body: some View {
         NavigationView {
-                Form {
-                Section {
+            Form {
+                Section(footer: Text("BTC Address goes here")) {
                     Text("Hello World")
                 }
             }.navigationBarTitle("Settings", displayMode: .inline)
-
+            
+            
         }
     }
 }

@@ -12,6 +12,7 @@ import SwiftOTP
 
 struct AuthenticatorRow: View {
     var account: Account
+    private let nilTime = Date(timeIntervalSince1970: 0)
     @State var visible: Bool = true
     @State var border: Color = Color.gray
     @EnvironmentObject var timeManager: TimeManager
@@ -22,25 +23,13 @@ struct AuthenticatorRow: View {
             if visible {
                 HStack {
                     VStack(alignment: .leading) {
-                        if account.type == "totp" {
+                        HStack {
                             Text(account.service!).lineLimit(1)
-                        } else {
-                            HStack {
-                                Text(account.service!).lineLimit(1)
-                                Button(action: {}) {
-                                    Image(systemName: "arrow.counterclockwise")
-                                }.onTapGesture {
-                                    self.account.counter += 1
-                                    do {
-                                        try self.managedObjectContext.save()
-                                    } catch {
-                                        print("counter increment won't save")
-                                    }
-
-                                }
-
+                            if self.account.favTime != self.nilTime {
+                                Image(systemName: "star.fill")
                             }
                         }
+                        
                         Spacer()
                         Text(account.account!).lineLimit(1)
                     }
@@ -53,7 +42,23 @@ struct AuthenticatorRow: View {
                 if account.type == "totp" {
                     ProgressBar(progress: getProgress(time: timeManager.date.timeIntervalSince1970, interval: account.interval)).frame(height:10)
                 } else {
-                    Spacer().frame(height:10)
+                    HStack {
+                        Spacer()
+                        Button(action: {}) {
+                            Image(systemName: "arrow.left")
+                        }.onTapGesture {
+                            self.account.counter -= 1
+                            self.saveToDB(error:"counter increment won't save")
+                        }.disabled(self.account.counter<=0)
+                        Spacer()
+                        Button(action: {}) {
+                            Image(systemName: "arrow.right")
+                        }.onTapGesture {
+                            self.account.counter += 1
+                            self.saveToDB(error: "counter increment won't save")
+                        }
+                        Spacer()
+                    }.frame(height:10)
                 }
                 
             }
@@ -67,8 +72,19 @@ struct AuthenticatorRow: View {
         .contextMenu {
             Button(action: {
                 print("Favorite")
+                if self.account.favTime != self.nilTime {
+                    self.account.favTime = self.nilTime
+                } else {
+                    self.account.favTime = Date()
+                }
+                
+                self.saveToDB(error: "Favorite")
             }) {
-                Text("Favorite")
+                if self.account.favTime != self.nilTime {
+                    Text("Unfavorite")
+                } else {
+                    Text("Favorite")
+                }
             }
             Button(action: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -82,7 +98,17 @@ struct AuthenticatorRow: View {
             }
         }
     }
+    
+    func saveToDB(error: String) {
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error)
+        }
+    }
 }
+
+
 
 func getOTP(account: Account, time: Int) -> String {
     guard let data = base32DecodeToData((account.key!.replacingOccurrences(of: " ", with: ""))) else {
@@ -107,10 +133,7 @@ func getOTP(account: Account, time: Int) -> String {
         }
         guard let otpString = hotp.generate(counter: UInt64(account.counter)) else { return "Error" }
         return otpString
-
     }
-    
-    
 }
 
 func getProgress(time: Double, interval:Int16) -> Float {

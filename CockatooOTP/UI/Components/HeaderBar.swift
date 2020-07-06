@@ -11,7 +11,6 @@ import CodeScanner
 import os
 
 struct HeaderBar: View {
-//    @State var query:String = ""
     @State var showAddMenu: Bool = false
     @State var isActionViewPresented = false
     @State var isSettingViewPresented = false
@@ -85,12 +84,14 @@ struct HeaderBar: View {
             case .success(let code):
                 print(code)
                 self.data = validate(code: code)
+                print(self.data)
+                print(self.alertText)
                 if self.data != [:] {
                     self.actionViewMode = .qrDone
                     self.isActionViewPresented = true
                 } else {
-                    self.isActionViewPresented = false
-                    self.isAlertPresented = true
+//                    self.isActionViewPresented = false
+//                    self.isAlertPresented = true
                 }
             case .failure(let error):
                 print(error)
@@ -101,8 +102,9 @@ struct HeaderBar: View {
     func validate(code: String ) -> [String:String]  {
         guard let url = URL(string:code) else {
             self.alertText = "Invalid QR code."
-            self.isActionViewPresented = false
-            self.isAlertPresented = true
+//            print("Invalid QR code.")
+//            self.isActionViewPresented = false
+//            self.isAlertPresented = true
             return [:]
 
         }
@@ -115,19 +117,32 @@ struct HeaderBar: View {
         }
         result["host"] = data["host"] as? String
 
-        
-        guard data["issuer"] != nil else {
-            self.alertText = "Invalid issuer."
-            return [:]
-        }
-        result["issuer"] = data["issuer"] as? String
-        
+                
         guard data["path"] != nil else {
             self.alertText = "Invalid path."
             return [:]
         }
         result["path"] = data["path"] as? String
         result["path"]?.removeFirst()
+        
+        
+        if data["issuer"] != nil {
+            result["issuer"] = data["issuer"] as? String
+        } else {
+            if (result["path"]?.contains(":"))! {
+                result["issuer"] = String(result["path"]!.split(separator: ":")[0])
+                result["path"] = String(result["path"]!.split(separator: ":")[1])
+            } else {
+                result["issuer"] = ""
+            }
+
+        }
+        
+//        guard data["issuer"] != nil else {
+//
+//        }
+        
+
         
         guard data["secret"] != nil else {
             self.alertText = "Invalid key."
