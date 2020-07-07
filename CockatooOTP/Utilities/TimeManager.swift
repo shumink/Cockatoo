@@ -17,8 +17,8 @@ class TimeManager: ObservableObject {
                                 self.date = Date()
                              })
     }
-    var unixEpochTime: UInt64 {
-        return UInt64(self.date.timeIntervalSince1970)
+    var unixEpochTime: Double {
+        return self.date.timeIntervalSince1970
     }
     
     var unixEpochTimeBinding: Binding<Int> {

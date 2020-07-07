@@ -47,7 +47,9 @@ struct AuthenticatorRow: View {
                         Button(action: {}) {
                             Image(systemName: "arrow.left")
                         }.onTapGesture {
-                            self.account.counter -= 1
+                            if self.account.counter >= 0 {
+                                self.account.counter -= 1
+                            }
                             self.saveToDB(error:"counter increment won't save")
                         }.disabled(self.account.counter<=0)
                         Spacer()
@@ -123,15 +125,18 @@ func getOTP(account: Account, time: Int) -> String {
     if account.type == "totp" {
         guard let totp = TOTP(secret: data, digits: Int(account.digits), timeInterval:
             Int(account.interval)) else {
-             return "Invalid key"
+                
+//                print(account)
+                return "Invalid key"
         }
         guard let otpString = totp.generate(secondsPast1970: time) else { return "Error" }
         return otpString
     } else {
         guard let hotp = HOTP(secret: data, digits: Int(account.digits)) else {
-             return "Invalid key"
+//            print(account)
+            return "Invalid key"
         }
-        guard let otpString = hotp.generate(counter: UInt64(account.counter)) else { return "Error" }
+        guard let otpString = hotp.generate(counter: UInt64(max(account.counter, 0))) else { return "Error" }
         return otpString
     }
 }
