@@ -36,7 +36,7 @@ struct AuthenticatorRow: View {
                         Text(account.account!).lineLimit(1)
                     }
                     Spacer()
-                    DigitsView(account: account, revealTime: $revealTime)
+                    DigitsView(account: account, saveToDB: self.saveToDB, revealTime: $revealTime)
                 }
                 
                 ProgressBar(progress: self.progress).frame(height:10)
@@ -48,6 +48,7 @@ struct AuthenticatorRow: View {
         .transition(.opacity)
         .padding()
         .border(Color.gray)
+        .shadow( radius: 1)
 
         .contextMenu {
             Button(action: {
@@ -61,6 +62,7 @@ struct AuthenticatorRow: View {
                     withAnimation {
                         self.visible.toggle()
                         self.managedObjectContext.delete(self.account)
+                        self.saveToDB(error: "delete")
                    }
                 }
             }) {

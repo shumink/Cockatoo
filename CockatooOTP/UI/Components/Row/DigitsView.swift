@@ -12,8 +12,11 @@ import SwiftOTP
 struct DigitsView: View {
     var account: Account
     let revealDuration = 20
+    let saveToDB: (_ error: String) -> Void
     @Binding var revealTime: Date
     @EnvironmentObject var timeManager: TimeManager
+    
+    
     
     var body: some View {
         Text(getOTP(account: account,
@@ -23,10 +26,14 @@ struct DigitsView: View {
             .animation(.easeInOut)
             .onTapGesture {
                 print("tapped")
-                self.revealTime = Date().addingTimeInterval(20)
+                if self.account.type == "hotp" && self.timeManager.date > self.revealTime {
+                    self.revealTime = Date().addingTimeInterval(TimeInterval(self.revealDuration))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(self.revealDuration)) {
+                        self.account.counter += 1
+                        self.saveToDB("counter increment")
+                    }
+                }
             }
-        
-
     }
 }
 
