@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D431BB1E610CB5C6FA3D99D /* Pods_CockatooOTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */; };
+		3E05745324B437FE00239835 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05745224B437FE00239835 /* Migration.swift */; };
+		3E05745524B43A6400239835 /* google-auth.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05745424B43A6400239835 /* google-auth.pb.swift */; };
+		3E05745824B4525800239835 /* DigitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E05745724B4525800239835 /* DigitsView.swift */; };
 		3E273D6E24AB2C3400872C6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D6D24AB2C3400872C6C /* AppDelegate.swift */; };
 		3E273D7024AB2C3400872C6C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E273D6F24AB2C3400872C6C /* SceneDelegate.swift */; };
 		3E273D7424AB2C3500872C6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E273D7324AB2C3500872C6C /* Assets.xcassets */; };
@@ -28,6 +31,9 @@
 
 /* Begin PBXFileReference section */
 		30954C8651F79BAE4AB49209 /* Pods-CockatooOTP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.debug.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.debug.xcconfig"; sourceTree = "<group>"; };
+		3E05745224B437FE00239835 /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
+		3E05745424B43A6400239835 /* google-auth.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "google-auth.pb.swift"; sourceTree = "<group>"; };
+		3E05745724B4525800239835 /* DigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsView.swift; sourceTree = "<group>"; };
 		3E273D6A24AB2C3400872C6C /* CockatooOTP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CockatooOTP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E273D6D24AB2C3400872C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E273D6F24AB2C3400872C6C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +68,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E05745624B4523F00239835 /* Row */ = {
+			isa = PBXGroup;
+			children = (
+				3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */,
+				3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */,
+				3E05745724B4525800239835 /* DigitsView.swift */,
+			);
+			path = Row;
+			sourceTree = "<group>";
+		};
 		3E273D6124AB2C3400872C6C = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				3E273D8124AB478600872C6C /* TimeManager.swift */,
+				3E05745424B43A6400239835 /* google-auth.pb.swift */,
 				3E81BA8024ADA35A00117C02 /* Utility.swift */,
+				3E05745224B437FE00239835 /* Migration.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -152,9 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				3E81BA6C24AB4D0900117C02 /* AuthenticatorList.swift */,
-				3E81BA6E24AB4D0900117C02 /* AuthenticatorRow.swift */,
+				3E05745624B4523F00239835 /* Row */,
 				3E81BA6F24AB4D0900117C02 /* HeaderBar.swift */,
-				3E81BA6D24AB4D0900117C02 /* ProgressBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -298,7 +315,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E273D6E24AB2C3400872C6C /* AppDelegate.swift in Sources */,
+				3E05745524B43A6400239835 /* google-auth.pb.swift in Sources */,
 				3E81BA7024AB4D0900117C02 /* AuthenticatorList.swift in Sources */,
+				3E05745324B437FE00239835 /* Migration.swift in Sources */,
 				3E81BA7224AB4D0900117C02 /* AuthenticatorRow.swift in Sources */,
 				3E81BA7124AB4D0900117C02 /* ProgressBar.swift in Sources */,
 				3E273D7024AB2C3400872C6C /* SceneDelegate.swift in Sources */,
@@ -307,6 +326,7 @@
 				3E81BA8124ADA35A00117C02 /* Utility.swift in Sources */,
 				3E81BA7524AB677700117C02 /* ManualView.swift in Sources */,
 				3E7B202824AEB28100CEFCD6 /* SettingView.swift in Sources */,
+				3E05745824B4525800239835 /* DigitsView.swift in Sources */,
 				3E273D9524AB493300872C6C /* ContentView.swift in Sources */,
 				3E273D8224AB478600872C6C /* TimeManager.swift in Sources */,
 			);

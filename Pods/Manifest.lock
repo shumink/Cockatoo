@@ -2,19 +2,23 @@ PODS:
   - CryptoSwift (1.3.1)
   - SwiftOTP (2.0.1):
     - CryptoSwift (>= 1.0.0)
+  - SwiftProtobuf (1.10.0)
 
 DEPENDENCIES:
   - SwiftOTP
+  - SwiftProtobuf (~> 1.0)
 
 SPEC REPOS:
   trunk:
     - CryptoSwift
     - SwiftOTP
+    - SwiftProtobuf
 
 SPEC CHECKSUMS:
   CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
   SwiftOTP: c246ca39c809c06471ef997c43699a04d562fdac
+  SwiftProtobuf: bfafffa9e26d1561c3bd0045e188c4fab5f527ae
 
-PODFILE CHECKSUM: 0b1110743cd36c81a2116ac2fd24a322ea2a0625
+PODFILE CHECKSUM: 1831a8aa0d724289ba91c44a0ecbe2fe863588a9
 
 COCOAPODS: 1.9.3

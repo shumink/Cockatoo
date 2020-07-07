@@ -29,7 +29,7 @@ struct HeaderBar: View {
             }) {
                 Image(systemName: "gear")
             }.sheet(isPresented: $isSettingViewPresented, content: {
-                SettingView()
+                SettingView().environment(\.managedObjectContext, self.managedObjectContext)
             })
             TextField("Search", text:$search)
                 .padding()
@@ -89,9 +89,6 @@ struct HeaderBar: View {
                 if self.data != [:] {
                     self.actionViewMode = .qrDone
                     self.isActionViewPresented = true
-                } else {
-//                    self.isActionViewPresented = false
-//                    self.isAlertPresented = true
                 }
             case .failure(let error):
                 print(error)
@@ -102,9 +99,6 @@ struct HeaderBar: View {
     func validate(code: String ) -> [String:String]  {
         guard let url = URL(string:code) else {
             self.alertText = "Invalid QR code."
-//            print("Invalid QR code.")
-//            self.isActionViewPresented = false
-//            self.isAlertPresented = true
             return [:]
 
         }
@@ -123,8 +117,10 @@ struct HeaderBar: View {
             return [:]
         }
         result["path"] = data["path"] as? String
-        result["path"]?.removeFirst()
-        
+        if (result["path"] != nil && result["path"] != "") {
+            result["path"]?.removeFirst()
+        }
+                
         
         if data["issuer"] != nil {
             result["issuer"] = data["issuer"] as? String
@@ -137,11 +133,6 @@ struct HeaderBar: View {
             }
 
         }
-        
-//        guard data["issuer"] != nil else {
-//
-//        }
-        
 
         
         guard data["secret"] != nil else {
@@ -180,15 +171,6 @@ enum ActionViewMode {
     case manual
     case qrDone
 }
-//CodeScannerView(codeTypes: [.qr], simulatedData: "Paul Hudson\npaul@hackingwithswift.com", completion: self.handleScan)
-//extension ActionViewMode {
-//    var view: some View {
-//        switch self {
-//            case .qr: return ManualView()
-//            case .manual: return ManualView()
-//        }
-//    }
-//}
 
 
 //struct HeaderBar_Previews: PreviewProvider {

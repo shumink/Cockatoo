@@ -7,15 +7,82 @@
 //
 
 import SwiftUI
+import SwiftOTP
 
 struct DigitsView: View {
+    var account: Account
+    let revealDuration = 20
+    @Binding var revealTime: Date
+    @EnvironmentObject var timeManager: TimeManager
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(getOTP(account: account,
+                    time: Int(timeManager.unixEpochTime),
+                    revealTime: self.revealTime))
+            .font(.title)
+            .animation(.easeInOut)
+            .onTapGesture {
+                print("tapped")
+                self.revealTime = Date().addingTimeInterval(20)
+            }
+        
+
     }
 }
 
-struct DigitsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DigitsView()
+//struct DigitsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DigitsView()
+//    }
+//}
+
+func getOTP(account: Account, time: Int, revealTime: Date) -> String {
+    switch account.type {
+    case "totp":
+        return getTOTP(account: account, time: time)
+    case "hotp":
+        return getHOTP(account: account, revealTime: revealTime)
+    default:
+        return "Invalid type"
     }
+}
+
+func getTOTP(account: Account, time: Int) -> String {
+    guard let data = base32DecodeToData((account.key!.replacingOccurrences(of: " ", with: ""))) else {
+        print(account.key!)
+        return "Invalid key"
+
+    }
+    if account.interval <= 0 || account.digits <= 0 {
+        return "Invalid interval"
+    }
+    
+    guard let totp = TOTP(secret: data, digits: Int(account.digits), timeInterval: Int(account.interval)) else {
+            return "Invalid key"
+    }
+    guard let otpString = totp.generate(secondsPast1970: time) else { return "Error" }
+    return otpString
+
+}
+
+func getHOTP(account: Account, revealTime: Date) -> String {
+    
+    guard let data = base32DecodeToData((account.key!.replacingOccurrences(of: " ", with: ""))) else {
+        print(account.key!)
+        return "Invalid key"
+
+    }
+
+    
+    guard let hotp = HOTP(secret: data, digits: Int(account.digits)) else {
+        return "Invalid key"
+    }
+    
+    guard Date() <= revealTime else {
+        return String(repeating: "*", count: Int(account.digits))
+    }
+    
+    guard let otpString = hotp.generate(counter: UInt64(max(account.counter, 0))) else { return "Error" }
+    return otpString
+
 }

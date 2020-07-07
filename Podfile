@@ -5,6 +5,7 @@ use_frameworks!
 target 'CockatooOTP' do
   # Comment the next line if you don't want to use dynamic frameworks
 
+  pod 'SwiftProtobuf', '~> 1.0'
   # Pods for Cockatoo
   pod 'SwiftOTP'
 end
