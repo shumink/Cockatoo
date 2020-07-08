@@ -28,3 +28,65 @@ extension URL {
     }
   }
 }
+
+
+func validateOTP(code: String) -> [String:String]  {
+    guard let url = URL(string:code) else {
+        return [:]
+
+    }
+    let data = url.params()
+    var result = [String:String]()
+    print(data)
+    guard data["host"] != nil else {
+        return [:]
+    }
+    result["host"] = data["host"] as? String
+
+            
+    guard data["path"] != nil else {
+        return [:]
+    }
+    result["path"] = data["path"] as? String
+    if (result["path"] != nil && result["path"] != "") {
+        result["path"]?.removeFirst()
+    }
+            
+    
+    if data["issuer"] != nil {
+        result["issuer"] = data["issuer"] as? String
+    } else {
+        if (result["path"]?.contains(":"))! {
+            result["issuer"] = String(result["path"]!.split(separator: ":")[0])
+            result["path"] = String(result["path"]!.split(separator: ":")[1])
+        } else {
+            result["issuer"] = ""
+        }
+
+    }
+
+    
+    guard data["secret"] != nil else {
+        return [:]
+    }
+    result["secret"] = data["secret"] as? String
+
+    if data["period"] == nil || NumberFormatter().number(from: data["period"] as! String) == nil {
+        result["period"] = "30"
+    } else {
+        result["period"] = data["period"] as? String
+    }
+    
+    if data["digits"] == nil || NumberFormatter().number(from: data["digits"] as! String) == nil {
+        result["digits"] = "6"
+    } else {
+        result["digits"] = data["digits"] as? String
+    }
+    
+    if data["counter"] == nil || NumberFormatter().number(from: data["counter"] as! String) == nil {
+        result["counter"] = "0"
+    } else {
+        result["counter"] = data["counter"] as? String
+    }
+    return result
+}

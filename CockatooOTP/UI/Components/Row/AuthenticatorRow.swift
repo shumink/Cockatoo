@@ -38,17 +38,14 @@ struct AuthenticatorRow: View {
                     Spacer()
                     DigitsView(account: account, saveToDB: self.saveToDB, revealTime: $revealTime)
                 }
-                
                 ProgressBar(progress: self.progress).frame(height:10)
-                
             }
-
         }
-        .animation(.easeInOut)
+//        .animation(.easeInOut)
         .transition(.opacity)
         .padding()
         .border(Color.gray)
-        .shadow( radius: 1)
+//        .shadow( radius: 1)
 
         .contextMenu {
             Button(action: {

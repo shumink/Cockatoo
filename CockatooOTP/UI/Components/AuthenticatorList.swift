@@ -31,16 +31,25 @@ struct AuthenticatorList: View {
         List(fetchRequest.wrappedValue, id: \.id) { account in
             AuthenticatorRow(account: account)
             .onAppear(perform: {let _ = self.timeManager.updateTimer})
-        }.onAppear(perform: {
+        }
+        .onAppear(perform: {
             UITableView.appearance().separatorStyle = .none
         })
     }
 }
 
-//struct AuthenticatorList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AuthenticatorList().environmentObject(TimeManager()).frame(minWidth: 360,
+struct AuthenticatorList_Previews: PreviewProvider {
+    static var previews: some View {
+//        let context = UIWin
+//            (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+
+        return AuthenticatorList(search: "").environmentObject(TimeManager())
+        .environment(\.managedObjectContext, context)
+//            .frame(minWidth: 360,
 //        maxWidth:.infinity,
 //        maxHeight: .infinity)
-//    }
-//}
+    }
+}

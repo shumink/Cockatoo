@@ -22,7 +22,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let timeManager = TimeManager()
-        let context = persistentContainer.viewContext
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+//        let context =  persistentContainer.viewContext
 
         let contentView = ContentView()
             .environmentObject(timeManager)
@@ -64,38 +66,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         saveContext()
     }
-
-    // 1
-    lazy var persistentContainer: NSPersistentContainer = {
-      // 2
-      let container = NSPersistentContainer(name: "Account")
-      // 3
-      container.loadPersistentStores { _, error in
-        // 4
-        if let error = error as NSError? {
-          // You should add your own error handling code here.
-          fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-      }
-      return container
-    }()
-    
     func saveContext() {
-      // 1
-      let context = persistentContainer.viewContext
-      // 2
-      if context.hasChanges {
-        do {
-          // 3
-          try context.save()
-        } catch {
-          // 4
-          // The context couldn't be saved.
-          // You should add your own error handling here.
-          let nserror = error as NSError
-          fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
-      }
     }
     
 

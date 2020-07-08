@@ -14,8 +14,8 @@ struct HeaderBar: View {
     @State var showAddMenu: Bool = false
     @State var isActionViewPresented = false
     @State var isSettingViewPresented = false
-    @State var alertText:String = ""
     @State var isAlertPresented = false
+    @State var isEditing = false
     @State var data: [String:String] = ["":""]
     @State var actionViewMode = ActionViewMode.qr
     @Binding var search: String
@@ -31,10 +31,36 @@ struct HeaderBar: View {
             }.sheet(isPresented: $isSettingViewPresented, content: {
                 SettingView().environment(\.managedObjectContext, self.managedObjectContext)
             })
-            TextField("Search", text:$search)
-                .padding()
-                .cornerRadius(10)
-                .border(Color.secondary)
+            
+            TextField("Search ...", text: $search)
+                .padding(7)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.horizontal, 10)
+                .onTapGesture {
+                    self.isEditing = true
+                }.overlay(
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 15)
+
+                        if isEditing {
+                            Button(action: {
+                                self.search = ""
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            }) {
+                                Image(systemName: "multiply.circle.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 20)
+                            }
+                        }
+                    }
+                )
+            
+            
             Button(action: {
                 self.showAddMenu.toggle()
             }) {
@@ -67,10 +93,7 @@ struct HeaderBar: View {
                                })
                         .environment(\.managedObjectContext, self.managedObjectContext)
                 }
-            }.alert(isPresented: $isAlertPresented) {
-                Alert(title: Text("Scanning Error"), message: Text(self.alertText), dismissButton: .default(Text("OK")))
             }
-            
             
         }.frame(maxWidth: .infinity,
                 minHeight: 36)
@@ -82,10 +105,7 @@ struct HeaderBar: View {
         self.isActionViewPresented = false
         switch result {
             case .success(let code):
-                print(code)
-                self.data = validate(code: code)
-                print(self.data)
-                print(self.alertText)
+                self.data = validateOTP(code: code)
                 if self.data != [:] {
                     self.actionViewMode = .qrDone
                     self.isActionViewPresented = true
@@ -96,74 +116,6 @@ struct HeaderBar: View {
         }
     }
     
-    func validate(code: String ) -> [String:String]  {
-        guard let url = URL(string:code) else {
-            self.alertText = "Invalid QR code."
-            return [:]
-
-        }
-        let data = url.params()
-        var result = [String:String]()
-        print(data)
-        guard data["host"] != nil else {
-            self.alertText = "Invalid authentication."
-            return [:]
-        }
-        result["host"] = data["host"] as? String
-
-                
-        guard data["path"] != nil else {
-            self.alertText = "Invalid path."
-            return [:]
-        }
-        result["path"] = data["path"] as? String
-        if (result["path"] != nil && result["path"] != "") {
-            result["path"]?.removeFirst()
-        }
-                
-        
-        if data["issuer"] != nil {
-            result["issuer"] = data["issuer"] as? String
-        } else {
-            if (result["path"]?.contains(":"))! {
-                result["issuer"] = String(result["path"]!.split(separator: ":")[0])
-                result["path"] = String(result["path"]!.split(separator: ":")[1])
-            } else {
-                result["issuer"] = ""
-            }
-
-        }
-
-        
-        guard data["secret"] != nil else {
-            self.alertText = "Invalid key."
-            return [:]
-        }
-        result["secret"] = data["secret"] as? String
-
-        if data["period"] == nil || NumberFormatter().number(from: data["period"] as! String) == nil {
-            result["period"] = "30"
-        } else {
-            result["period"] = data["period"] as? String
-        }
-        
-        if data["digits"] == nil || NumberFormatter().number(from: data["digits"] as! String) == nil {
-            result["digits"] = "6"
-        } else {
-            result["digits"] = data["digits"] as? String
-        }
-        
-        if data["counter"] == nil || NumberFormatter().number(from: data["counter"] as! String) == nil {
-            result["counter"] = "0"
-        } else {
-            result["counter"] = data["counter"] as? String
-        }
-        print("result")
-
-        print(result)
-        print(type(of: result))
-        return result
-    }
 }
 
 enum ActionViewMode {
@@ -173,8 +125,8 @@ enum ActionViewMode {
 }
 
 
-//struct HeaderBar_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HeaderBar()
-//    }
-//}
+struct HeaderBar_Previews: PreviewProvider {
+    static var previews: some View {
+        HeaderBar(search: .constant(""))
+    }
+}

@@ -15,7 +15,6 @@ struct ManualView: View {
     var types = ["totp", "hotp"]
     @State var selectedType = 0
     @State var service: String = ""
-//    @State var type: String = ""
     @State var account: String = ""
     @State var key: String = ""
     @State var interval: String = ""

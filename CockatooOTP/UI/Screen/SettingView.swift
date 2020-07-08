@@ -48,13 +48,6 @@ struct SettingView: View {
                 } catch (let e) {
                     print(e)
                 }
-//                self.data = validate(code: code)
-//                print(self.data)
-//                print(self.alertText)
-//                if self.data != [:] {
-//                    self.actionViewMode = .qrDone
-//                    self.isActionViewPresented = true
-//                }
             case .failure(let error):
                 print(error)
                 print("Scanning failed")
