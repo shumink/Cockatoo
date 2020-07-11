@@ -9,3 +9,5 @@ Features:
 Upcoming:
 * iCloud syncs.
 * Widget.
+
+Join our discussion on matrix: #cockatoo:matrx.org or get the app via TestFlight.
