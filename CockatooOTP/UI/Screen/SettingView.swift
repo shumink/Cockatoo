@@ -12,39 +12,42 @@ import CodeScanner
 
 struct SettingView: View {
     @State var isScannerActive: Bool = false
+    @State var migrationAlert: String = ""
+    @State var isAlertPresent: Bool = false
     @Environment(\.managedObjectContext) var managedObjectContext
 
     
     var body: some View {
         NavigationView {
             Form {
-                Section(footer: Text("BTC Address goes here")) {
-                    Text("Hello World")
-                }
+
                 
                 Section(header: Text("Migration")) {
                     NavigationLink(destination: CodeScannerView(codeTypes: [.qr],
                                                                 completion: self.handleScan),
                                    isActive: $isScannerActive) {
                         Text("Import from Google Authenticator")
-
                     }
                 }
+                .alert(isPresented: self.$isAlertPresent, content: {
+                    return Alert(title: Text("Account Migration"), message: Text(self.migrationAlert))
+                })
             }.navigationBarTitle("Settings", displayMode: .inline)
         }
     }
     
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
-//        self.isActionViewPresented = false
         switch result {
             case .success(let code):
                 print(code)
                 do {
                     let data = try unpackGoogleAuthScanned(code: code)
                     let imported = importFromGoogleAuth(code: data, moc: self.managedObjectContext)
-                    print("imported")
-                    print(imported)
+                    self.migrationAlert = "Succesfully imported \(imported) accounts."
                     self.isScannerActive = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.isAlertPresent = true
+                    }
                 } catch (let e) {
                     print(e)
                 }

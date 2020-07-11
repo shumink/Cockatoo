@@ -18,6 +18,8 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HeaderBar(search: $search).environment(\.managedObjectContext, managedObjectContext)
+//            Divider()
+
             AuthenticatorList(search: search)
 
         }.frame(maxWidth: .infinity,

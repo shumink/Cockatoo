@@ -12,14 +12,13 @@ import SwiftOTP
 import CoreData
 
 struct ManualView: View {
-    var types = ["totp", "hotp"]
-    @State var selectedType = 0
+    @State var timeBased = true
     @State var service: String = ""
     @State var account: String = ""
     @State var key: String = ""
-    @State var interval: String = ""
-    @State var digits: String = ""
-    @State var counter: String = ""
+    @State var interval: String = "30"
+    @State var digits: String = "6"
+    @State var counter: String = "0"
     @State var warning: String = ""
     @Environment(\.managedObjectContext) var managedObjectContext
     var callback: () -> Void
@@ -55,7 +54,7 @@ struct ManualView: View {
         newAccount.account = account
         newAccount.key = key
         newAccount.interval = Int16(interval)!
-        newAccount.type = types[selectedType]
+        newAccount.type = self.timeBased ? "totp" : "hotp"
         newAccount.digits = Int16(digits)!
         newAccount.counter = Int64(counter)!
         newAccount.createdTime = Date()
@@ -76,12 +75,6 @@ struct ManualView: View {
         
             Form {
                 Section (header:Text("Your Account Information"), footer: Text(warning).foregroundColor(Color.red)) {
-                    Picker(selection: $selectedType, label: Text("Type")) {
-                       ForEach(0 ..< types.count) {
-                        Text(self.types[$0].uppercased())
-                       }
-                    }
-
                     TextField("Service", text: $service)
                     TextField("Account", text: $account)
                     SecureField("Secret Key", text: $key)
@@ -96,7 +89,10 @@ struct ManualView: View {
                     }
                 }
                 Section (header:Text("Advanced")) {
-                    if self.selectedType == 0 {
+                    Toggle(isOn: $timeBased) {
+                        Text("Time-based")
+                    }
+                    if self.timeBased {
                         TextField("Interval", text: $interval)
                             .onReceive(Just(interval)) { newValue in
                                     let filtered = newValue.filter { "0123456789".contains($0) }
@@ -104,7 +100,6 @@ struct ManualView: View {
                                         self.interval = filtered
                                     }
                             }
-
                     } else {
                         TextField("Counter", text: $counter)
                             .onReceive(Just(counter)) { newValue in
@@ -129,8 +124,9 @@ struct ManualView: View {
                     }.disabled(!canSave)
 
                 }
-            }
-        }
+            }.navigationBarTitle("Manual", displayMode: .inline)
+        }.navigationViewStyle(StackNavigationViewStyle())
+        
     }
 }
 

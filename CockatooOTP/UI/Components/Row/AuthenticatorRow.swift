@@ -41,12 +41,9 @@ struct AuthenticatorRow: View {
                 ProgressBar(progress: self.progress).frame(height:10)
             }
         }
-//        .animation(.easeInOut)
         .transition(.opacity)
         .padding()
-        .border(Color.gray)
-//        .shadow( radius: 1)
-
+        .background(RoundedRectangle(cornerRadius: 4).stroke(Color.gray, lineWidth: 1))
         .contextMenu {
             Button(action: {
                 self.account.favTime = self.account.favTime == self.nilTime ? Date(): self.nilTime
@@ -99,4 +96,13 @@ func getTOTPProgress(time: Double, interval:Int) -> Double {
     
     let multiples = Int(time) / interval
     return (time - Double((interval * multiples))) / Double(interval)
+}
+
+struct AuthenticatorRow_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        return AuthenticatorList(search: "").environmentObject(TimeManager())
+        .environment(\.managedObjectContext, context)
+
+    }
 }
