@@ -24,7 +24,7 @@ struct HeaderBar: View {
     var body: some View {
         
         
-        VStack {
+        VStack(spacing: 5) {
             
             HStack {
                 Text("Cockatoo").font(.system(.largeTitle, design: .rounded)).bold()
@@ -37,8 +37,6 @@ struct HeaderBar: View {
                 }.sheet(isPresented: $isSettingViewPresented, content: {
                     SettingView().environment(\.managedObjectContext, self.managedObjectContext)
                 }).padding(.trailing)
-                
-                
                 
                 Button(action: {
                     self.showAddMenu.toggle()
@@ -75,7 +73,6 @@ struct HeaderBar: View {
                 }
                 
             }
-            .padding(.bottom, -18)
             .padding(.leading)
             .padding(.trailing)
             
@@ -105,14 +102,14 @@ struct HeaderBar: View {
                     }) {
                         Text("Cancel")
                     }
-//                    .padding(.trailing, 10)
                     .transition(.move(edge: .trailing))
                     .animation(.default)
                 }
-            }.padding(.leading)
+            }
+            .padding(.leading)
             .padding(.trailing)
+            Divider()
 
-            Divider().padding(.bottom, 0)
         }
     }
     

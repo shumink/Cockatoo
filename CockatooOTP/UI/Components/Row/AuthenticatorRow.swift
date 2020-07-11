@@ -41,13 +41,18 @@ struct AuthenticatorRow: View {
                 ProgressBar(progress: self.progress).frame(height:10)
             }
         }
-        .transition(.opacity)
         .padding()
         .background(RoundedRectangle(cornerRadius: 4).stroke(Color.gray, lineWidth: 1))
+        .transition(.scale)
         .contextMenu {
             Button(action: {
-                self.account.favTime = self.account.favTime == self.nilTime ? Date(): self.nilTime
-                self.saveToDB(error: "Favorite")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation {
+                        self.account.favTime = self.account.favTime == self.nilTime ? Date(): self.nilTime
+                        self.saveToDB(error: "Favorite")
+
+                    }
+                }
             }) {
                 Text(self.account.favTime == self.nilTime ? "Favorite": "Unfavorite")
             }
@@ -55,7 +60,10 @@ struct AuthenticatorRow: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation {
                         self.visible.toggle()
-                        self.managedObjectContext.delete(self.account)
+                        withAnimation {
+                            self.managedObjectContext.delete(self.account)
+
+                        }
                         self.saveToDB(error: "delete")
                    }
                 }

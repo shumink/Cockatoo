@@ -68,7 +68,7 @@ struct DigitsView: View {
             Text(getOTP(account: account,
                         time: Int(timeManager.unixEpochTime),
                         revealTime: self.revealTime))
-                .font(.title)
+                .font(Font.system(.title, design: .monospaced))
                 .onTapGesture {
                     if self.masked {
                         self.reveal()

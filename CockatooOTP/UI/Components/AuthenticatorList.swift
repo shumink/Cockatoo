@@ -32,6 +32,7 @@ struct AuthenticatorList: View {
             AuthenticatorRow(account: account)
             .onAppear(perform: {let _ = self.timeManager.updateTimer})
         }
+        .animation(.default)
         .onAppear(perform: {
             UITableView.appearance().separatorStyle = .none
         })
@@ -40,9 +41,6 @@ struct AuthenticatorList: View {
 
 struct AuthenticatorList_Previews: PreviewProvider {
     static var previews: some View {
-//        let context = UIWin
-//            (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
 
