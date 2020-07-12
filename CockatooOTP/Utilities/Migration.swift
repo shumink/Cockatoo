@@ -11,7 +11,7 @@ import CoreData
 import SwiftOTP
 
 func importFromGoogleAuth(code: String, moc: NSManagedObjectContext) -> Int {
-    let migratedAccounts = deserialize(code: code)
+    let migratedAccounts = deserialize(code: code.removingPercentEncoding!)
     migratedAccounts.forEach { otpParams in
         immigrate(otp: otpParams, moc: moc)
     }
@@ -25,20 +25,20 @@ func importFromGoogleAuth(code: String, moc: NSManagedObjectContext) -> Int {
     
 }
 
-func exportToGoogleAuth(accounts: [Account]) throws -> String {
+func exportToGoogleAuth(accounts: [Account], index: Int32, id: Int32) throws -> String {
     
     let otpParams = accounts.map(emigrate)
     
     let result = MigrationPayload.with {
         $0.otpParameters = otpParams
         $0.batchSize = Int32(otpParams.count)
-        $0.batchIndex = 0
-        $0.batchID = 0
-
+        $0.batchIndex = index
+        $0.batchID = id
+        $0.version = 1
     }
     
     let data = try result.serializedData()
-    return Data(data).base64EncodedString()    
+    return Data(data).base64EncodedString().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 }
 
 
@@ -48,8 +48,8 @@ func deserialize(code: String) -> [MigrationPayload.OtpParameters] {
     let decoded = Data(base64Encoded: code)!
     do {
         let migration = try MigrationPayload(serializedData: decoded)
-        print(migration.otpParameters)
-
+        print(migration)
+//        print(Data(try migration.serializedData()).base64EncodedString())
         return migration.otpParameters
     } catch (let e) {
         print(e)
@@ -78,11 +78,12 @@ func immigrate(otp: MigrationPayload.OtpParameters, moc: NSManagedObjectContext)
 
 func emigrate(account: Account) -> MigrationPayload.OtpParameters {
     var otp = MigrationPayload.OtpParameters()
+    otp.algorithm = MigrationPayload.Algorithm.algoSha1
     otp.issuer = account.service!
     otp.name = account.account!
     otp.secret = base32DecodeToData(account.key!)!
     otp.type = account.type == "totp" ? MigrationPayload.OtpType.otpTotp: MigrationPayload.OtpType.otpHotp
-    otp.digits = Int32(account.digits)
+    otp.digits = 1//Int32(account.digits)
     otp.counter = account.counter
     return otp
 }

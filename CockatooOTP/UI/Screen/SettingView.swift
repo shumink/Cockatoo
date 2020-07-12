@@ -14,25 +14,28 @@ struct SettingView: View {
     @State var isScannerActive: Bool = false
     @State var migrationAlert: String = ""
     @State var isAlertPresent: Bool = false
+    @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
 
     
     var body: some View {
         NavigationView {
             Form {
-
-                
                 Section(header: Text("Migration")) {
                     NavigationLink(destination: CodeScannerView(codeTypes: [.qr],
                                                                 completion: self.handleScan),
                                    isActive: $isScannerActive) {
                         Text("Import from Google Authenticator")
                     }
+                    NavigationLink(destination: ExportView().environment(\.managedObjectContext, managedObjectContext)) {
+                        Text("Export to Google Authenticator")
+                    }
+
                 }
                 .alert(isPresented: self.$isAlertPresent, content: {
                     return Alert(title: Text("Account Migration"), message: Text(self.migrationAlert))
                 })
-            }.navigationBarTitle("Settings", displayMode: .inline)
+            }.navigationBarTitle("More", displayMode: .inline)
         }
     }
     

@@ -33,7 +33,7 @@ struct HeaderBar: View {
                 Button(action: {
                     self.isSettingViewPresented.toggle()
                 }) {
-                    Image(systemName: "gear").imageScale(.large)
+                    Image(systemName: "ellipsis").imageScale(.large)
                 }.sheet(isPresented: $isSettingViewPresented, content: {
                     SettingView().environment(\.managedObjectContext, self.managedObjectContext)
                 }).padding(.trailing)

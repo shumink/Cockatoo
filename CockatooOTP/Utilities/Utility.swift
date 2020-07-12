@@ -7,26 +7,28 @@
 //
 
 import Foundation
-
+import CoreImage
+import CoreImage.CIFilterBuiltins
+import UIKit
 
 
 extension URL {
-  func params() -> [String:Any] {
-    var dict = [String:String]()
-
-    if let components = URLComponents(url: self, resolvingAgainstBaseURL: true) {
-        dict["host"] = components.host
-        dict["path"] = components.path
-      if let queryItems = components.queryItems {
-        for item in queryItems {
-          dict[item.name] = item.value!
+    func params() -> [String:Any] {
+        var dict = [String:String]()
+        
+        if let components = URLComponents(url: self, resolvingAgainstBaseURL: true) {
+            dict["host"] = components.host
+            dict["path"] = components.path
+            if let queryItems = components.queryItems {
+                for item in queryItems {
+                    dict[item.name] = item.value!
+                }
+            }
+            return dict
+        } else {
+            return [:]
         }
-      }
-      return dict
-    } else {
-      return [:]
     }
-  }
 }
 
 
@@ -89,4 +91,21 @@ func validateOTP(code: String) -> [String:String]  {
         result["counter"] = data["counter"] as? String
     }
     return result
+}
+
+func generateQRCode(from string: String) -> UIImage {
+    let filter = CIFilter.qrCodeGenerator()
+    let context = CIContext()
+
+    let data = Data(string.utf8)
+    
+    filter.setValue(data, forKey: "inputMessage")
+
+    if let outputImage = filter.outputImage {
+        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+            return UIImage(cgImage: cgimg)
+        }
+    }
+
+    return UIImage(systemName: "xmark.circle") ?? UIImage()
 }

@@ -87,37 +87,43 @@ struct ManualView: View {
                             self.key = newValue
                         }
                     }
-                }
-                Section (header:Text("Advanced")) {
                     Toggle(isOn: $timeBased) {
                         Text("Time-based")
                     }
-                    if self.timeBased {
-                        TextField("Interval", text: $interval)
-                            .onReceive(Just(interval)) { newValue in
-                                    let filtered = newValue.filter { "0123456789".contains($0) }
-                                    if filtered != newValue {
-                                        self.interval = filtered
-                                    }
-                            }
-                    } else {
-                        TextField("Counter", text: $counter)
-                            .onReceive(Just(counter)) { newValue in
-                                    let filtered = newValue.filter { "0123456789".contains($0) }
-                                    if filtered != newValue {
-                                        self.counter = filtered
-                                    }
-                            }
 
-                    }
-                    TextField("Digits", text: $digits)
-                        .onReceive(Just(digits)) { newValue in
-                                let filtered = newValue.filter { "0123456789".contains($0) }
-                                if filtered != newValue {
-                                    self.digits = filtered
-                                }
-                        }
                 }
+                
+                // Harcoding this section
+//                Section (header:Text("Advanced")) {
+//                    Toggle(isOn: $timeBased) {
+//                        Text("Time-based")
+//                    }
+//                    if self.timeBased {
+//                        TextField("Interval", text: $interval)
+//                            .onReceive(Just(interval)) { newValue in
+//                                    let filtered = newValue.filter { "0123456789".contains($0) }
+//                                    if filtered != newValue {
+//                                        self.interval = filtered
+//                                    }
+//                            }
+//                    } else {
+//                        TextField("Counter", text: $counter)
+//                            .onReceive(Just(counter)) { newValue in
+//                                    let filtered = newValue.filter { "0123456789".contains($0) }
+//                                    if filtered != newValue {
+//                                        self.counter = filtered
+//                                    }
+//                            }
+//
+//                    }
+//                    TextField("Digits", text: $digits)
+//                        .onReceive(Just(digits)) { newValue in
+//                                let filtered = newValue.filter { "0123456789".contains($0) }
+//                                if filtered != newValue {
+//                                    self.digits = filtered
+//                                }
+//                        }
+//                }
                 Section {
                     Button(action: self.save) {
                         Text("Save")

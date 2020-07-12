@@ -20,20 +20,21 @@ struct AuthenticatorRow: View {
     @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    
     var body: some View {
         VStack {
             if visible {
                 HStack {
                     VStack(alignment: .leading) {
                         HStack {
-                            Text(account.service!).lineLimit(1)
+                            Text(account.service ?? "").lineLimit(1)
                             if self.account.favTime != self.nilTime {
                                 Image(systemName: "star.fill")
                             }
                         }
                         
                         Spacer()
-                        Text(account.account!).lineLimit(1)
+                        Text(account.account ?? "").lineLimit(1)
                     }
                     Spacer()
                     DigitsView(account: account, saveToDB: self.saveToDB, revealTime: $revealTime)
