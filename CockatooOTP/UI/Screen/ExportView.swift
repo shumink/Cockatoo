@@ -7,17 +7,26 @@
 //
 
 import SwiftUI
+import os
 
 struct ExportView: View {
     let accountsPerImage: Int = 8
     let attemptID: Int32 = Int32.random(in:Int32.min ... Int32.max)
     var fetchRequest: FetchRequest<Account>
-    //    var results: FetchedResults<Account> { fetchRequest.wrappedValue }
+    @State var qrImage: UIImage = UIImage()
+    @State var idx: Int = 0
     @EnvironmentObject var timeManager: TimeManager
-
     @Environment(\.managedObjectContext) var managedObjectContext
-//    var account: Account
-
+    var nImages:Int {
+        Int(ceil(Float(self.fetchRequest.wrappedValue.count) / Float(accountsPerImage)))
+    }
+//    var images = Array<UIImage>()
+//    var
+//    var lazyImages: LazyMapSequence<Array<Int>, UIImage>
+//    @State var lazyImages: LazyMapSequence<Array<Int>, UIImage> = Array(0...99).lazy.map{_ in UIImage()}
+//    lazy var fibonacciOfAge: UIImage = {
+//        return UIImage()
+//    }()
 
     init() {
         self.fetchRequest = FetchRequest<Account> (
@@ -27,62 +36,55 @@ struct ExportView: View {
                 NSSortDescriptor(keyPath: \Account.createdTime, ascending: false),
             ]
         )
-        
-//        let acc1 = Account(context: self.managedObjectContext)
-//        acc1.account = "shuminkong@protonmail.com"
-//        acc1.service = "Protonmail"
-//        acc1.digits = 6
-//        acc1.interval = 30
-//        acc1.type = "totp"
-//        acc1.key = "AWSGRJH7572OE3KJZEM4SNDVHD57DKDGQQ7JYWEZR5ZWOXAFJCOJDI5D"
-//        acc1.favTime = Date(timeIntervalSince1970: 0)
-//        acc1.createdTime = Date(timeIntervalSince1970: 0)
-//        acc1.counter = 0
-//        self.account = acc1
-//        print( self.fetchRequest)
-        
     }
     
-    func accounts2Image(index: Int32) -> UIImage {
-//        do {
-//            let data = try exportToGoogleAuth(accounts:accounts, index: index, id: attemptID)
-//
-//        } catch(let error) {
-//            print(error)
-//            let data = "" // better error handling
-//        }
-        let accounts = [self.fetchRequest.wrappedValue.first! as Account]
-        guard let data = try? exportToGoogleAuth(accounts:accounts, index: index, id: attemptID) else {
+    func accounts2Image(index: Int) -> UIImage {
+        var accounts: [Account] = []
+        self.fetchRequest.wrappedValue
+            .prefix((index+1)*accountsPerImage)
+            .dropFirst((index)*accountsPerImage)
+            .forEach { each in
+            accounts.append(each)
+        }
+        os_log("Exporting %d accounts", accounts.count)
+        guard let data = try? exportToGoogleAuth(accounts:accounts, index: Int32(index), batch_size: Int32(nImages), id: attemptID) else {
             return UIImage()
         }
-
-        
         let exportedString = "otpauth-migration://offline?data=\(data)"
-        print(exportedString)
         return generateQRCode(from: exportedString)
-
     }
 
     var body: some View {
-        List(fetchRequest.wrappedValue, id: \.id) { account in
-//            AuthenticatorRow(account: account)
-//            Text(account.key!)
-//            Image
-            Image(uiImage: self.accounts2Image(index: 0))
-            .resizable()
-            .scaledToFit()
-            .frame(width: 200, height: 200)
-
-        }
-        .animation(.default)
-        .onAppear(perform: {
-            UITableView.appearance().separatorStyle = .none
-        })
-
-//        Image(uiImage: accounts2Image(accounts: [self.account], index: 0))
-//        .resizable()
-//        .scaledToFit()
-//        .frame(width: 200, height: 200)
+        VStack {
+            if nImages == 1 {
+                Text("Open the app, and scan this code.").font(.title).frame(height: 100)
+            } else {
+                if idx != nImages-1 {
+                    Text("Open the app, and scan the code \(idx+1) of \(nImages).").font(.title).frame(height: 100)
+                } else {
+                    Text("Finally, scan the last code.").font(.title).frame(height: 100)
+                }
+            }
+            Image(uiImage: self.qrImage)
+                .interpolation(.none)
+                .resizable()
+                .scaledToFit()
+                .transition(.scale)
+                .onAppear {
+                    self.qrImage = self.accounts2Image(index: self.idx)
+                }
+            
+            if nImages > 1 && idx != nImages-1 {
+                Button(action: {
+                    if self.idx < self.nImages {
+                        self.idx += 1
+                        self.qrImage = self.accounts2Image(index: self.idx)
+                    }
+                }, label: {Text("Next")})
+                .disabled(self.idx>=nImages-1)
+            }
+            Spacer()
+        }.padding()
     }
 }
 

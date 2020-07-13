@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 import SwiftOTP
 import CoreData
+import os
 
 struct ManualView: View {
     @State var timeBased = true
@@ -62,9 +63,8 @@ struct ManualView: View {
         do {
             
             try managedObjectContext.save()
-            print("saved")
-        } catch {
-            print("Error saving managed object context: \(error)")
+        } catch (let error) {
+            os_log("Error saving managed object context: %s", error.localizedDescription)
         }
         callback()
 

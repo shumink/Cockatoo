@@ -9,6 +9,7 @@
 import SwiftUI
 import CoreData
 import CodeScanner
+import os
 
 struct SettingView: View {
     @State var isScannerActive: Bool = false
@@ -42,7 +43,6 @@ struct SettingView: View {
     func handleScan(result: Result<String, CodeScannerView.ScanError>) {
         switch result {
             case .success(let code):
-                print(code)
                 do {
                     let data = try unpackGoogleAuthScanned(code: code)
                     let imported = importFromGoogleAuth(code: data, moc: self.managedObjectContext)
@@ -52,11 +52,10 @@ struct SettingView: View {
                         self.isAlertPresent = true
                     }
                 } catch (let e) {
-                    print(e)
+                    os_log("%s", e.localizedDescription as String)
                 }
             case .failure(let error):
-                print(error)
-                print("Scanning failed")
+                os_log("%s", error.localizedDescription)
         }
 
     }

@@ -25,20 +25,20 @@ func importFromGoogleAuth(code: String, moc: NSManagedObjectContext) -> Int {
     
 }
 
-func exportToGoogleAuth(accounts: [Account], index: Int32, id: Int32) throws -> String {
+func exportToGoogleAuth(accounts: [Account], index: Int32, batch_size: Int32, id: Int32) throws -> String {
     
     let otpParams = accounts.map(emigrate)
     
     let result = MigrationPayload.with {
         $0.otpParameters = otpParams
-        $0.batchSize = Int32(otpParams.count)
+        $0.batchSize = batch_size
         $0.batchIndex = index
         $0.batchID = id
         $0.version = 1
     }
     
     let data = try result.serializedData()
-    return Data(data).base64EncodedString().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+    return Data(data).base64EncodedString().addingPercentEncoding(withAllowedCharacters: .alphanumerics)!
 }
 
 

@@ -30,7 +30,6 @@ struct DigitsView: View {
         default:
             return 0
         }
-//        Int(self.account.interval) - Int(self.timeManager.date.timeIntervalSince1970) % Int(self.account.interval)
     }
     
     
@@ -138,7 +137,6 @@ func getOTP(account: Account, time: Int, revealTime: Date) -> String {
 
 func getTOTP(account: Account, time: Int) -> String {
     guard let data = base32DecodeToData((account.key!.replacingOccurrences(of: " ", with: ""))) else {
-        print(account.key!)
         return "Invalid key"
 
     }
@@ -157,7 +155,6 @@ func getTOTP(account: Account, time: Int) -> String {
 func getHOTP(account: Account, revealTime: Date) -> String {
     
     guard let data = base32DecodeToData((account.key!.replacingOccurrences(of: " ", with: ""))) else {
-        print(account.key!)
         return "Invalid key"
 
     }

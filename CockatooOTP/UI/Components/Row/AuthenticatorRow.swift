@@ -9,6 +9,7 @@
 import CoreData
 import SwiftUI
 import SwiftOTP
+import os
 
 struct AuthenticatorRow: View {
     var account: Account
@@ -77,8 +78,8 @@ struct AuthenticatorRow: View {
     func saveToDB(error: String) {
         do {
             try self.managedObjectContext.save()
-        } catch {
-            print(error)
+        } catch (let e) {
+            os_log("%s", e.localizedDescription)
         }
     }
     var progress: Double {
