@@ -23,8 +23,8 @@ struct SettingView: View {
         NavigationView {
             Form {
                 Section(header: Text("Migration")) {
-                    NavigationLink(destination: CodeScannerView(codeTypes: [.qr],
-                                                                completion: self.handleScan),
+                    NavigationLink(destination:
+                        QRCodeScanner(title: "Point the camera at the QR code given by the Google Authenticator.", callback: self.handleScan),
                                    isActive: $isScannerActive) {
                         Text("Import from Google Authenticator")
                     }

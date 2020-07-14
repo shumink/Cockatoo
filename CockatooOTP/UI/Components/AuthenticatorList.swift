@@ -44,10 +44,8 @@ struct AuthenticatorList_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
 
-        return AuthenticatorList(search: "").environmentObject(TimeManager())
-        .environment(\.managedObjectContext, context)
-//            .frame(minWidth: 360,
-//        maxWidth:.infinity,
-//        maxHeight: .infinity)
+        return AuthenticatorList(search: "")
+            .environmentObject(TimeManager())
+            .environment(\.managedObjectContext, context)
     }
 }

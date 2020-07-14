@@ -27,6 +27,7 @@
 		3E81BA7C24AD5AA000117C02 /* Account.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA7B24AD5AA000117C02 /* Account.xcdatamodel */; };
 		3E81BA7F24AD9C6800117C02 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 3E81BA7E24AD9C6800117C02 /* CodeScanner */; };
 		3E81BA8124ADA35A00117C02 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA8024ADA35A00117C02 /* Utility.swift */; };
+		3EE0155C24BD266900F91095 /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0155B24BD266900F91095 /* QRCodeScanner.swift */; };
 		3EEC51BF24BB20D600F09D98 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC51BE24BB20D600F09D98 /* ExportView.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		3E81BA7424AB677700117C02 /* ManualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualView.swift; sourceTree = "<group>"; };
 		3E81BA7B24AD5AA000117C02 /* Account.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Account.xcdatamodel; path = Account.xcdatamodeld/Account.xcdatamodel; sourceTree = SOURCE_ROOT; };
 		3E81BA8024ADA35A00117C02 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		3EE0155B24BD266900F91095 /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
 		3EEC51BE24BB20D600F09D98 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CockatooOTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.release.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				3EEC51BE24BB20D600F09D98 /* ExportView.swift */,
 				3E273D9324AB493300872C6C /* ContentView.swift */,
 				3E7B202724AEB28100CEFCD6 /* SettingView.swift */,
+				3EE0155B24BD266900F91095 /* QRCodeScanner.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE0155C24BD266900F91095 /* QRCodeScanner.swift in Sources */,
 				3E273D6E24AB2C3400872C6C /* AppDelegate.swift in Sources */,
 				3E05745524B43A6400239835 /* google-auth.pb.swift in Sources */,
 				3E81BA7024AB4D0900117C02 /* AuthenticatorList.swift in Sources */,

@@ -56,7 +56,7 @@ struct HeaderBar: View {
                             self.isActionViewPresented = false
                         }).environment(\.managedObjectContext, self.managedObjectContext)
                     } else if self.actionViewMode == .qr {
-                        CodeScannerView(codeTypes: [.qr], completion: self.handleScan)
+                        QRCodeScanner(title: "Point the camera at a QR code.", callback: self.handleScan)
                     } else {
                         ManualView(timeBased: self.data["host"]! == "totp",
                                    service: self.data["issuer"]! ,

@@ -16,43 +16,39 @@ struct AuthenticatorRow: View {
     private let nilTime = Date(timeIntervalSince1970: 0)
     let revealDuration: Double = 20
     @State var revealTime = Date.distantPast
-    @State var visible: Bool = true
     @State var border: Color = Color.gray
     @EnvironmentObject var timeManager: TimeManager
     @Environment(\.managedObjectContext) var managedObjectContext
     
     
     var body: some View {
+        
         VStack {
-            if visible {
-                HStack {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(account.service ?? "").lineLimit(1)
-                            if self.account.favTime != self.nilTime {
-                                Image(systemName: "star.fill")
-                            }
+            HStack {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(account.service ?? "").lineLimit(1)
+                        if self.account.favTime != self.nilTime {
+                            Image(systemName: "star.fill")
                         }
-                        
-                        Spacer()
-                        Text(account.account ?? "").lineLimit(1)
                     }
+                    
                     Spacer()
-                    DigitsView(account: account, saveToDB: self.saveToDB, revealTime: $revealTime)
+                    Text(account.account ?? "").lineLimit(1)
                 }
-                ProgressBar(progress: self.progress).frame(height:10)
+                Spacer()
+                DigitsView(account: account, saveToDB: self.saveToDB, revealTime: $revealTime)
             }
+            ProgressBar(progress: self.progress).frame(height:10)
         }
         .padding()
         .background(RoundedRectangle(cornerRadius: 4).stroke(Color.gray, lineWidth: 1))
-        .transition(.scale)
         .contextMenu {
             Button(action: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation {
                         self.account.favTime = self.account.favTime == self.nilTime ? Date(): self.nilTime
                         self.saveToDB(error: "Favorite")
-
                     }
                 }
             }) {
@@ -61,13 +57,8 @@ struct AuthenticatorRow: View {
             Button(action: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation {
-                        self.visible.toggle()
-                        withAnimation {
-                            self.managedObjectContext.delete(self.account)
-
-                        }
-                        self.saveToDB(error: "delete")
-                   }
+                        self.managedObjectContext.delete(self.account)
+                    }
                 }
             }) {
                 Text("Delete")
@@ -111,8 +102,9 @@ func getTOTPProgress(time: Double, interval:Int) -> Double {
 struct AuthenticatorRow_Previews: PreviewProvider {
     static var previews: some View {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        return AuthenticatorList(search: "").environmentObject(TimeManager())
-        .environment(\.managedObjectContext, context)
-
+        return AuthenticatorList(search: "")
+            .environmentObject(TimeManager())
+            .environment(\.managedObjectContext, context)
+        
     }
 }
