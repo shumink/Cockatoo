@@ -28,6 +28,7 @@
 		3E81BA7F24AD9C6800117C02 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 3E81BA7E24AD9C6800117C02 /* CodeScanner */; };
 		3E81BA8124ADA35A00117C02 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E81BA8024ADA35A00117C02 /* Utility.swift */; };
 		3EE0155C24BD266900F91095 /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE0155B24BD266900F91095 /* QRCodeScanner.swift */; };
+		3EE0156224BD883E00F91095 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3EE0156424BD883E00F91095 /* Localizable.strings */; };
 		3EEC51BF24BB20D600F09D98 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC51BE24BB20D600F09D98 /* ExportView.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		3E81BA7B24AD5AA000117C02 /* Account.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Account.xcdatamodel; path = Account.xcdatamodeld/Account.xcdatamodel; sourceTree = SOURCE_ROOT; };
 		3E81BA8024ADA35A00117C02 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		3EE0155B24BD266900F91095 /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
+		3EE0156324BD883E00F91095 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3EEC51BE24BB20D600F09D98 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
 		66CD2CE4B6C13A84B4576D18 /* Pods_CockatooOTP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CockatooOTP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64F0B3FD06BA56B13B19DFF /* Pods-CockatooOTP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CockatooOTP.release.xcconfig"; path = "Target Support Files/Pods-CockatooOTP/Pods-CockatooOTP.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		3E273D8624AB47F500872C6C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3EE0156424BD883E00F91095 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E273D7A24AB2C3500872C6C /* LaunchScreen.storyboard in Resources */,
+				3EE0156224BD883E00F91095 /* Localizable.strings in Resources */,
 				3E273D7724AB2C3500872C6C /* Preview Assets.xcassets in Resources */,
 				3E273D7424AB2C3500872C6C /* Assets.xcassets in Resources */,
 			);
@@ -349,6 +353,14 @@
 				3E273D7924AB2C3500872C6C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3EE0156424BD883E00F91095 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3EE0156324BD883E00F91095 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -56,7 +56,8 @@ struct HeaderBar: View {
                             self.isActionViewPresented = false
                         }).environment(\.managedObjectContext, self.managedObjectContext)
                     } else if self.actionViewMode == .qr {
-                        QRCodeScanner(title: "Point the camera at a QR code.", callback: self.handleScan)
+                        QRCodeScanner(title: "Point the camera at a QR code.", callback: self.handleScan).onTapGesture{self.isActionViewPresented.toggle()}
+                            
                     } else {
                         ManualView(timeBased: self.data["host"]! == "totp",
                                    service: self.data["issuer"]! ,
@@ -123,8 +124,7 @@ struct HeaderBar: View {
                 self.isActionViewPresented = true
             }
         case .failure(let error):
-            print(error)
-            print("Scanning failed")
+            os_log("%s", error.localizedDescription)
         }
     }
     

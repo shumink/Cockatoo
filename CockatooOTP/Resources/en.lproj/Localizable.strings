@@ -5,3 +5,21 @@
   Created by Shumin Kong on 14/7/20.
   Copyright © 2020 Shumin Kong. All rights reserved.
 */
+// SettingView.swift
+"Migration" = "转移账户";
+"Point the camera at the QR code given by the Google Authenticator." = "扫描 Google Authenticator 的导出二维码。";
+"Import from Google Authenticator" = "从 Google Authenticator 导入";
+"Export to Google Authenticator" = "导出至 Google Authenticator";
+"Account Migration" = "账户转移";
+"More" = "更多";
+"Next" = "下一个";
+
+
+// HeaderBar.swift
+"Where do you want to import from?" = "如何添加账号？";
+"Search ..." = "搜索";
+"Cancel" = "取消";
+"QR Code" = "扫描二维码";
+"Manual" = "手动添加";
+
+"Cockatoo" = "Cockatoo";
