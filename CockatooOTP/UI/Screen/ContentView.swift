@@ -60,6 +60,6 @@ struct ContentView_Previews: PreviewProvider {
 //        }
 
         
-        return ContentView().environment(\.managedObjectContext, context).environment(\.locale, .init(identifier: "zh")).environmentObject(timeManager)
+        return ContentView().environment(\.managedObjectContext, context).environmentObject(timeManager)
     }
 }

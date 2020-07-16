@@ -78,7 +78,7 @@ struct HeaderBar: View {
             .padding(.trailing)
             
             HStack {
-                TextField("Search ...", text: $search)
+                TextField("Search", text: $search)
                     .padding(7)
                     .padding(.horizontal, 25)
                     .background(Color(.systemGray6))
