@@ -37,7 +37,7 @@
 		3E05745224B437FE00239835 /* Migration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 		3E05745424B43A6400239835 /* google-auth.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "google-auth.pb.swift"; sourceTree = "<group>"; };
 		3E05745724B4525800239835 /* DigitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitsView.swift; sourceTree = "<group>"; };
-		3E273D6A24AB2C3400872C6C /* CockatooOTP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CockatooOTP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E273D6A24AB2C3400872C6C /* Cockatoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cockatoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E273D6D24AB2C3400872C6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E273D6F24AB2C3400872C6C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3E273D7324AB2C3500872C6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		3E273D6B24AB2C3400872C6C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3E273D6A24AB2C3400872C6C /* CockatooOTP.app */,
+				3E273D6A24AB2C3400872C6C /* Cockatoo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 				3E81BA7E24AD9C6800117C02 /* CodeScanner */,
 			);
 			productName = CockatooOTP;
-			productReference = 3E273D6A24AB2C3400872C6C /* CockatooOTP.app */;
+			productReference = 3E273D6A24AB2C3400872C6C /* Cockatoo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -493,6 +493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0.4.1;
 				DEVELOPMENT_ASSET_PATHS = "\"CockatooOTP/Preview Content\"";
 				DEVELOPMENT_TEAM = J95MPMXN6Y;
 				ENABLE_PREVIEWS = YES;
@@ -501,11 +502,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumink.CockatooOTP;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Cockatoo;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -515,6 +517,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0.4.1;
 				DEVELOPMENT_ASSET_PATHS = "\"CockatooOTP/Preview Content\"";
 				DEVELOPMENT_TEAM = J95MPMXN6Y;
 				ENABLE_PREVIEWS = YES;
@@ -523,11 +526,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shumink.CockatooOTP;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Cockatoo;
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
