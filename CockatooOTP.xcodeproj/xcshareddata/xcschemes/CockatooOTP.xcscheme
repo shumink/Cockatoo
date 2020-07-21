@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3E273D6924AB2C3400872C6C"
-               BuildableName = "CockatooOTP.app"
+               BuildableName = "Cockatoo.app"
                BlueprintName = "CockatooOTP"
                ReferencedContainer = "container:CockatooOTP.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E273D6924AB2C3400872C6C"
-            BuildableName = "CockatooOTP.app"
+            BuildableName = "Cockatoo.app"
             BlueprintName = "CockatooOTP"
             ReferencedContainer = "container:CockatooOTP.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3E273D6924AB2C3400872C6C"
-            BuildableName = "CockatooOTP.app"
+            BuildableName = "Cockatoo.app"
             BlueprintName = "CockatooOTP"
             ReferencedContainer = "container:CockatooOTP.xcodeproj">
          </BuildableReference>
