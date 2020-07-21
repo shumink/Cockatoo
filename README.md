@@ -1,4 +1,5 @@
 # Cockatoo
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 <a href="https://apps.apple.com/us/app/cockatoootp/id1523046071?mt=8" style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2020-07-17&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;"></a>
 
